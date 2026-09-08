@@ -1,0 +1,34 @@
+[
+    {
+        "question" : "Voila la question1 ?", 
+        "réponseA" : "aaaa", 
+        "réponseB" : "bbbb", 
+        "réponseC" : "cccc", 
+        "réponse" : 2, 
+        "indice" :"l’indice !"
+    },
+    {
+        "question" : "Voila la question2 ?", 
+        "réponseA" : "aaaa", 
+        "réponseB" : "bbbb", 
+        "réponseC" : "cccc", 
+        "réponse" : 2, 
+        "indice" :"l’indice !"
+    },
+    {
+        "question" : "Voila la question3 ?", 
+        "réponseA" : "aaaa", 
+        "réponseB" : "bbbb", 
+        "réponseC" : "cccc", 
+        "réponse" : 2, 
+        "indice" :"l’indice !"
+    },
+    {
+        "question" : "Voila la question4 ?", 
+        "réponseA" : "aaaa", 
+        "réponseB" : "bbbb", 
+        "réponseC" : "cccc", 
+        "réponse" : 2, 
+        "indice" :"l’indice !"
+    }
+]
