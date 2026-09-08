@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 import requests
 
+baseURL = "http://127.0.0.1:8000"
+
 class Question(ABC):
     def __init__(self):
         self._la_question = ""
@@ -12,6 +14,8 @@ class Question(ABC):
         self.gestionnaire_du_jeu = None
 
     def trouver_question(self, id_partie:int):
+        global baseURL
+        
         url = "/question/salle-"
         if id_partie == 2 :
             url += "2"
@@ -19,8 +23,6 @@ class Question(ABC):
             url += "3"
         else :
            url += "1"
-
-        baseURL = "http://127.0.0.1:8000"
 
         url=baseURL+url
 

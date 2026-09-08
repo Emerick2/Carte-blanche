@@ -1,8 +1,9 @@
-from Question import Question
+from .Question import Question
 
-class ErreurFonction(Question):
+class TypageCompliquer(Question):
     def __init__(self) :
-        self.trouver_question(3)
+        super().__init__()
+        self.trouver_question(2)
 
     def afficher_la_question(self):
         # idRéponse = self.gestionnaire_du_jeu.nombre_de_bonne_réponse

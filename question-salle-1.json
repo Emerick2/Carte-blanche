@@ -1,11 +1,11 @@
 [
     {
-        "question" : "Voila la question1 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
+        "question" : "De quel type est cette variable ? a = \"1\" ", 
+        "réponseA" : "string", 
+        "réponseB" : "String", 
+        "réponseC" : "char", 
+        "réponse" : 1, 
+        "indice" :"C'est une chaîne de quelque chose."
     },
     {
         "question" : "Voila la question2 ?", 

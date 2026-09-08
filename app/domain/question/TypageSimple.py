@@ -1,8 +1,9 @@
-from Question import Question
+from .Question import Question
 
-class TypageCompliquer(Question):
+class TypageSimple(Question):
     def __init__(self) :
-        self.trouver_question(2)
+        super().__init__()
+        self.trouver_question(1)
 
     def afficher_la_question(self):
         # idRéponse = self.gestionnaire_du_jeu.nombre_de_bonne_réponse
@@ -21,4 +22,3 @@ class TypageCompliquer(Question):
         t += "\n > 0 - Voir un indice !\n"
         print(t)
         self.en_attente_de_la_réponse_du_joeur(3, True)
-
