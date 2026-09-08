@@ -1,6 +1,7 @@
+from abc import ABC, abstractmethod
 import requests
 
-class Question:
+class Question(ABC):
     def __init__(self):
         self._la_question = ""
         self._réponseA = "" 
@@ -37,23 +38,9 @@ class Question:
                 self._numéro_réponse_attendu = données["réponse"]
                 self._indice = données["indice"]
 
+    @abstractmethod
     def afficher_la_question(self):
-        # idRéponse = self.gestionnaire_du_jeu.nombre_de_bonne_réponse
-        idRéponse = 1
-        t = "\n"
-        t += "==============\n"
-        t +=f"  QUESTION {idRéponse} \n"
-        t += "==============\n\n"
-        t +=f" | Question : {self._la_question}\n\n"
-        t += "Quel est le numéro de la bonne réponse ?\n"
-        t +=f" > 1 - {self._réponseA}\n"
-        t +=f" > 2 - {self._réponseB}\n"
-        t +=f" > 3 - {self._réponseC}\n"
-
-        # if self.gestionnaire_du_jeu.droit_à_indice > 0
-        t += "\n > 0 - Voir un indice !\n"
-        print(t)
-        self.en_attente_de_la_réponse_du_joeur(3, True)
+        pass
 
     def en_attente_de_la_réponse_du_joeur(self, nombreMaximum, peut_voir_indice) :
         choix = -1
@@ -96,7 +83,20 @@ class Question:
         return t
 
 
-question = Question()
-question.trouver_question(1)
-# print(question)
-question.afficher_la_question()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
