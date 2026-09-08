@@ -73,4 +73,3 @@ def salle_3_question_id(question_id) :
         return donnees[int(question_id)]
 
 # --------------------------------------------------------------
-
