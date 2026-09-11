@@ -1,7 +1,8 @@
-from Question import Question
+from .Question import Question
 
 class TypageSimple(Question):
     def __init__(self) :
+        super().__init__()
         self.trouver_question(1)
 
     def afficher_la_question(self):
@@ -21,3 +22,7 @@ class TypageSimple(Question):
         t += "\n > 0 - Voir un indice !\n"
         print(t)
         self.en_attente_de_la_réponse_du_joeur(3, True)
+
+    def __str__(self):
+        return super().__str__() + "\n\tType : Typage simple."
+        

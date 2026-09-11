@@ -1,34 +1,242 @@
 [
-    {
-        "question" : "Voila la question1 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
-    },
-    {
-        "question" : "Voila la question2 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
-    },
-    {
-        "question" : "Voila la question3 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
-    },
-    {
-        "question" : "Voila la question4 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
-    }
+{
+"question": "De quel type est cette variable ? a = '1'",
+"réponseA": "str",
+"réponseB": "int",
+"réponseC": "char",
+"réponse": 1,
+"indice": "Les guillemets entourent une chaîne de caractères."
+},
+{
+"question": "De quel type est cette variable ? b = 42",
+"réponseA": "float",
+"réponseB": "int",
+"réponseC": "number",
+"réponse": 2,
+"indice": "C'est un nombre entier sans virgule."
+},
+{
+"question": "De quel type est cette variable ? c = 3.14",
+"réponseA": "double",
+"réponseB": "int",
+"réponseC": "float",
+"réponse": 3,
+"indice": "C'est un nombre à virgule (nombre flottant)."
+},
+{
+"question": "De quel type est cette variable ? d = True",
+"réponseA": "bool",
+"réponseB": "boolean",
+"réponseC": "str",
+"réponse": 1,
+"indice": "En Python, le type booléen s'écrit en minuscule."
+},
+{
+"question": "De quel type est cette variable ? e = [1, 2, 3]",
+"réponseA": "array",
+"réponseB": "list",
+"réponseC": "tuple",
+"réponse": 2,
+"indice": "Les crochets [] définissent cette structure de données."
+},
+{
+"question": "De quel type est cette variable ? f = (1, 2, 3)",
+"réponseA": "tuple",
+"réponseB": "list",
+"réponseC": "set",
+"réponse": 1,
+"indice": "Les parenthèses () créent une séquence immuable."
+},
+{
+"question": "De quel type est cette variable ? g = {'nom': 'Alice', 'âge': 25}",
+"réponseA": "object",
+"réponseB": "dict",
+"réponseC": "json",
+"réponse": 2,
+"indice": "Il contient des paires clé-valeur entre accolades."
+},
+{
+"question": "De quel type est cette variable ? h = {1, 2, 3}",
+"réponseA": "dict",
+"réponseB": "list",
+"réponseC": "set",
+"réponse": 3,
+"indice": "C'est un ensemble d'éléments uniques sans clés."
+},
+{
+"question": "Quel est le type de la valeur spéciale None en Python ?",
+"réponseA": "Null",
+"réponseB": "NoneType",
+"réponseC": "void",
+"réponse": 2,
+"indice": "C'est le type représentant l'absence de valeur."
+},
+{
+"question": "De quel type est cette variable ? j = ''",
+"réponseA": "str",
+"réponseB": "NoneType",
+"réponseC": "bool",
+"réponse": 1,
+"indice": "Même vide, du texte entre guillemets reste une chaîne."
+},
+{
+"question": "De quel type est cette variable ? k = 0",
+"réponseA": "bool",
+"réponseB": "int",
+"réponseC": "float",
+"réponse": 2,
+"indice": "C'est un nombre entier représentant la valeur zéro."
+},
+{
+"question": "De quel type est cette variable ? l = 0.0",
+"réponseA": "int",
+"réponseB": "float",
+"réponseC": "bool",
+"réponse": 2,
+"indice": "La présence du point décimal indique un flottant."
+},
+{
+"question": "De quel type est cette variable ? m = 'False'",
+"réponseA": "bool",
+"réponseB": "str",
+"réponseC": "NoneType",
+"réponse": 2,
+"indice": "Attention aux guillemets ! La valeur est traitée comme du texte."
+},
+{
+"question": "De quel type est le premier élément de cette liste ? n = ['a']",
+"réponseA": "list",
+"réponseB": "char",
+"réponseC": "str",
+"réponse": 3,
+"indice": "On s'intéresse à l'élément 'a', pas à la liste elle-même."
+},
+{
+"question": "Que renvoie l'instruction type(10) ?",
+"réponseA": "<class 'int'>",
+"réponseB": "10",
+"réponseC": "int",
+"réponse": 1,
+"indice": "La fonction type() retourne la représentation de la classe."
+},
+{
+"question": "Quel est le type du résultat de l'expression str(123) ?",
+"réponseA": "int",
+"réponseB": "str",
+"réponseC": "float",
+"réponse": 2,
+"indice": "La fonction str() convertit sa valeur en chaîne de caractères."
+},
+{
+"question": "Quel est le type du résultat de int('45') ?",
+"réponseA": "int",
+"réponseB": "str",
+"réponseC": "float",
+"réponse": 1,
+"indice": "La fonction int() transforme une chaîne numérique en entier."
+},
+{
+"question": "Quel est le type du résultat de float('3') ?",
+"réponseA": "int",
+"réponseB": "str",
+"réponseC": "float",
+"réponse": 3,
+"indice": "La fonction float() convertit une chaîne en nombre à virgule."
+},
+{
+"question": "De quel type est le résultat de l'expression 5 > 2 ?",
+"réponseA": "int",
+"réponseB": "bool",
+"réponseC": "str",
+"réponse": 2,
+"indice": "Une comparaison logique renvoie toujours Vrai ou Faux."
+},
+{
+"question": "De quel type est cette variable ? t = (5,)",
+"réponseA": "int",
+"réponseB": "tuple",
+"réponseC": "list",
+"réponse": 2,
+"indice": "La virgule après le 5 crée un tuple d'un seul élément."
+},
+{
+"question": "De quel type est cette variable ? u = (5)",
+"réponseA": "tuple",
+"réponseB": "int",
+"réponseC": "list",
+"réponse": 2,
+"indice": "Sans virgule, les parenthèses servent seulement de parenthèses mathématiques."
+},
+{
+"question": "De quel type est cette variable par défaut ? v = {}",
+"réponseA": "set",
+"réponseB": "dict",
+"réponseC": "list",
+"réponse": 2,
+"indice": "Des accolades vides créent un dictionnaire par défaut."
+},
+{
+"question": "De quel type est la variable créée par w = set() ?",
+"réponseA": "set",
+"réponseB": "dict",
+"réponseC": "tuple",
+"réponse": 1,
+"indice": "C'est la fonction officielle pour créer un ensemble vide."
+},
+{
+"question": "De quel type est le résultat de len('bonjour') ?",
+"réponseA": "str",
+"réponseB": "int",
+"réponseC": "float",
+"réponse": 2,
+"indice": "La fonction len() compte le nombre d'éléments et renvoie un entier."
+},
+{
+"question": "Quel est le type de la variable y après y = '10' + '20' ?",
+"réponseA": "int",
+"réponseB": "str",
+"réponseC": "list",
+"réponse": 2,
+"indice": "L'addition entre deux chaînes concatène du texte."
+},
+{
+"question": "De quel type est le résultat de la division 10 / 2 en Python 3 ?",
+"réponseA": "int",
+"réponseB": "float",
+"réponseC": "double",
+"réponse": 2,
+"indice": "L'opérateur / renvoie toujours un nombre flottant en Python 3."
+},
+{
+"question": "De quel type est le résultat de la division entière 10 // 2 ?",
+"réponseA": "int",
+"réponseB": "float",
+"réponseC": "str",
+"réponse": 1,
+"indice": "L'opérateur // calcule la division entière."
+},
+{
+"question": "De quel type est cette variable ? ab = [1, 'deux', 3.0]",
+"réponseA": "tuple",
+"réponseB": "dict",
+"réponseC": "list",
+"réponse": 3,
+"indice": "Cette structure entre crochets peut stocker plusieurs types."
+},
+{
+"question": "De quel type est la valeur renvoyée par range(5) ?",
+"réponseA": "list",
+"réponseB": "range",
+"réponseC": "tuple",
+"réponse": 2,
+"indice": "En Python 3, cette fonction possède son propre type d'itérable."
+},
+{
+"question": "De quel type est le résultat de l'opération True + False ?",
+"réponseA": "bool",
+"réponseB": "int",
+"réponseC": "str",
+"réponse": 2,
+"indice": "En Python, True vaut 1 et False vaut 0 lors d'un calcul mathématique."
+}
 ]
