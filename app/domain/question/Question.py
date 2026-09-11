@@ -66,7 +66,7 @@ class Question(ABC):
             print("\n Bravo ! C'est la bonne réponse !")
             # self.gestionnaire_du_jeu.victoire()
         else :
-            print("\n Eh non ! Se n'est pas la bonne réponse...\nMais ne désespère pas, tu finiras par y arrivé !")
+            print(f"\n Eh non ! Se n'est pas la bonne réponse... C'était le {self._numéro_réponse_attendu}.\nMais ne désespère pas, tu finiras par y arrivé !")
             # self.gestionnaire_du_jeu.défaite()
 
     def afficher_indice(self):
