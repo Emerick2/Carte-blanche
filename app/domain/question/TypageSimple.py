@@ -22,3 +22,7 @@ class TypageSimple(Question):
         t += "\n > 0 - Voir un indice !\n"
         print(t)
         self.en_attente_de_la_réponse_du_joeur(3, True)
+
+    def __str__(self):
+        return super().__str__() + "\n\tType : Typage simple."
+        

@@ -23,3 +23,5 @@ class TypageCompliquer(Question):
         print(t)
         self.en_attente_de_la_réponse_du_joeur(3, True)
 
+    def __str__(self):
+        return super().__str__() + "\n\tType : Typage compliquer."

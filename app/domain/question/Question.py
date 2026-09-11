@@ -64,8 +64,10 @@ class Question(ABC):
     def réponse_à_la_question(self, réponse:int):
         if réponse == self._numéro_réponse_attendu:
             print("\n Bravo ! C'est la bonne réponse !")
+            # self.gestionnaire_du_jeu.victoire()
         else :
             print("\n Eh non ! Se n'est pas la bonne réponse...\nMais ne désespère pas, tu finiras par y arrivé !")
+            # self.gestionnaire_du_jeu.défaite()
 
     def afficher_indice(self):
         # if self.gestionnaire_du_jeu.droit_à_indice > 0:
@@ -77,9 +79,9 @@ class Question(ABC):
     def __str__(self):
         t = "\nInformation sur la question :"
         t += f"\n\tQuestion : {self._la_question}"
-        t += f"\n\tRéponseA : {self._réponseA}"
-        t += f"\n\tRéponseB : {self._réponseB}"
-        t += f"\n\tRéponseC : {self._réponseC}"
+        t += f"\n\tRéponse A : {self._réponseA}"
+        t += f"\n\tRéponse B : {self._réponseB}"
+        t += f"\n\tRéponse C : {self._réponseC}"
         t += f"\n\tRéponse : {self._numéro_réponse_attendu}"
         t += f"\n\tIndice : {self._indice}"
         return t

@@ -1,34 +1,242 @@
 [
     {
-        "question" : "Q2 - Voila la question1 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
+        "question": "De quel type est la variable a = (1) ?",
+        "réponseA": "tuple",
+        "réponseB": "int",
+        "réponseC": "list",
+        "réponse": 2,
+        "indice": "Sans virgule, les parenthèses servent juste à grouper l\"expression."
     },
     {
-        "question" : "Voila la question2 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
+        "question": "De quel type est la variable a = {} ?",
+        "réponseA": "set",
+        "réponseB": "dict",
+        "réponseC": "empty",
+        "réponse": 2,
+        "indice": "Pour créer un ensemble vide, on utilise set() et non les accolades."
     },
     {
-        "question" : "Voila la question3 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
+        "question": "De quel type est le résultat de type(type(1)) ?",
+        "réponseA": "type",
+        "réponseB": "int",
+        "réponseC": "class",
+        "réponse": 1,
+        "indice": "En Python, la classe des types est elle-même de ce type."
     },
     {
-        "question" : "Voila la question4 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
+        "question": "De quel type est la valeur de a = ... ?",
+        "réponseA": "ellipsis",
+        "réponseB": "str",
+        "réponseC": "NoneType",
+        "réponse": 1,
+        "indice": "Il s\"agit de l\"objet littéral Ellipsis utilisé souvent pour le découpage avancé."
+    },
+    {
+        "question": "De quel type est le résultat de True + 1 ?",
+        "réponseA": "bool",
+        "réponseB": "int",
+        "réponseC": "TypeError",
+        "réponse": 2,
+        "indice": "En Python, bool hérite directement de int."
+    },
+    {
+        "question": "De quel type est la variable a = 1j ?",
+        "réponseA": "complex",
+        "réponseB": "str",
+        "réponseC": "imaginary",
+        "réponse": 1,
+        "indice": "C\"est le type natif pour manipuler les nombres complexes."
+    },
+    {
+        "question": "De quel type est le résultat de a = (x for x in range(5)) ?",
+        "réponseA": "tuple",
+        "réponseB": "generator",
+        "réponseC": "iterator",
+        "réponse": 2,
+        "indice": "Des parenthèses autour d\"une compréhension créent une expression génératrice."
+    },
+    {
+        "question": "De quel type est la variable a = b\"hello\" ?",
+        "réponseA": "str",
+        "réponseB": "bytes",
+        "réponseC": "bytearray",
+        "réponse": 2,
+        "indice": "Le préfixe b indique une séquence d\"octets immuable."
+    },
+    {
+        "question": "De quel type est le résultat de type(None) ?",
+        "réponseA": "None",
+        "réponseB": "NoneType",
+        "réponseC": "null",
+        "réponse": 2,
+        "indice": "C\"est le type officiel représentant l\"absence de valeur."
+    },
+    {
+        "question": "De quel type est la variable a = float(\"nan\") ?",
+        "réponseA": "float",
+        "réponseB": "NaN",
+        "réponseC": "ValueError",
+        "réponse": 1,
+        "indice": "Not a Number (NaN) est considéré comme une valeur numérique à virgule flottante."
+    },
+    {
+        "question": "De quel type est la valeur renvoyée par {}.keys() ?",
+        "réponseA": "list",
+        "réponseB": "dict_keys",
+        "réponseC": "tuple",
+        "réponse": 2,
+        "indice": "C\"est une vue dynamique sur les clés d\"un dictionnaire, pas une liste."
+    },
+    {
+        "question": "De quel type est l\"expression int | str (Python 3.10+) ?",
+        "réponseA": "UnionType",
+        "réponseB": "Union",
+        "réponseC": "type",
+        "réponse": 1,
+        "indice": "L\"opérateur | entre deux types produit un objet de type UnionType."
+    },
+    {
+        "question": "De quel type est la variable a = frozenset([1, 2]) ?",
+        "réponseA": "set",
+        "réponseB": "frozenset",
+        "réponseC": "tuple",
+        "réponse": 2,
+        "indice": "C\"est la version immuable et hachable d\"un ensemble."
+    },
+    {
+        "question": "De quel type est le résultat de type(lambda x: x) ?",
+        "réponseA": "function",
+        "réponseB": "lambda",
+        "réponseC": "code",
+        "réponse": 1,
+        "indice": "Les fonctions anonymes ont exactement le même type que les fonctions définies avec def."
+    },
+    {
+        "question": "De quel type est la variable a = range(10) ?",
+        "réponseA": "list",
+        "réponseB": "generator",
+        "réponseC": "range",
+        "réponse": 3,
+        "indice": "En Python 3, range est un type de séquence immuable à part entière."
+    },
+    {
+        "question": "De quel type est le résultat de type(len) ?",
+        "réponseA": "function",
+        "réponseB": "builtin_function_or_method",
+        "réponseC": "method",
+        "réponse": 2,
+        "indice": "Il s\"agit d\"une fonction intégrée écrite en C."
+    },
+    {
+        "question": "De quel type est la variable a = memoryview(b\"abc\") ?",
+        "réponseA": "memoryview",
+        "réponseB": "bytes",
+        "réponseC": "buffer",
+        "réponse": 1,
+        "indice": "Permet d\"accéder à la mémoire interne d\"un objet sans effectuer de copie."
+    },
+    {
+        "question": "De quel type est la variable a = slice(1, 5, 2) ?",
+        "réponseA": "range",
+        "réponseB": "slice",
+        "réponseC": "tuple",
+        "réponse": 2,
+        "indice": "Objet interne généré par la syntaxe de découpage [1:5:2]."
+    },
+    {
+        "question": "De quel type est le résultat de type(NotImplemented) ?",
+        "réponseA": "NotImplementedType",
+        "réponseB": "bool",
+        "réponseC": "Exception",
+        "réponse": 1,
+        "indice": "Objet renvoyé par les méthodes spéciales lorsque l\"opération n\"est pas supportée."
+    },
+    {
+        "question": "De quel type est la variable a = zip([1], [2]) ?",
+        "réponseA": "list",
+        "réponseB": "tuple",
+        "réponseC": "zip",
+        "réponse": 3,
+        "indice": "C\"est un itérateur dédié qui combine des éléments d\"itérables."
+    },
+    {
+        "question": "De quel type est la variable a = bytearray(b\"abc\") ?",
+        "réponseA": "bytes",
+        "réponseB": "bytearray",
+        "réponseC": "list",
+        "réponse": 2,
+        "indice": "C\"est la version mutable de l\"objet bytes."
+    },
+    {
+        "question": "De quel type est le résultat de 1 / 1 ?",
+        "réponseA": "int",
+        "réponseB": "float",
+        "réponseC": "number",
+        "réponse": 2,
+        "indice": "En Python 3, l\"opérateur / produit toujours un flottant."
+    },
+    {
+        "question": "De quel type est le résultat de 1 // 1.0 ?",
+        "réponseA": "int",
+        "réponseB": "float",
+        "réponseC": "TypeError",
+        "réponse": 2,
+        "indice": "Si l\"un des deux opérandes est un float, la division entière renvoie un float."
+    },
+    {
+        "question": "De quel type est la variable a = map(str, [1, 2]) ?",
+        "réponseA": "list",
+        "réponseB": "map",
+        "réponseC": "generator",
+        "réponse": 2,
+        "indice": "map renvoie un itérateur propre de son propre type."
+    },
+    {
+        "question": "De quel type est le résultat de type(int) ?",
+        "réponseA": "type",
+        "réponseB": "class",
+        "réponseC": "int",
+        "réponse": 1,
+        "indice": "Toutes les classes natives sont des instances de type."
+    },
+    {
+        "question": "De quel type est la variable a = filter(None, [True, False]) ?",
+        "réponseA": "filter",
+        "réponseB": "list",
+        "réponseC": "bool",
+        "réponse": 1,
+        "indice": "Renvoie un objet itérateur spécifique de filtrage."
+    },
+    {
+        "question": "De quel type est la variable a = enumerate([\"a\", \"b\"]) ?",
+        "réponseA": "list",
+        "réponseB": "tuple",
+        "réponseC": "enumerate",
+        "réponse": 3,
+        "indice": "Génère un objet d\"itération renvoyant des paires (index, valeur)."
+    },
+    {
+        "question": "De quel type est la variable a = (1,) ?",
+        "réponseA": "int",
+        "réponseB": "tuple",
+        "réponseC": "list",
+        "réponse": 2,
+        "indice": "La présence de la virgule est obligatoire pour définir un tuple à un seul élément."
+    },
+    {
+        "question": "De quel type est l\"objet super() dans une classe ?",
+        "réponseA": "super",
+        "réponseB": "type",
+        "réponseC": "object",
+        "réponse": 1,
+        "indice": "C\"est un objet proxy permettant de déléguer les méthodes aux classes mères."
+    },
+    {
+        "question": "De quel type est le résultat de [x for x in range(3)][0] ?",
+        "réponseA": "list",
+        "réponseB": "int",
+        "réponseC": "range",
+        "réponse": 2,
+        "indice": "On accède au premier élément de la liste générée par la compréhension."
     }
 ]

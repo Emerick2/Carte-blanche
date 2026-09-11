@@ -1,34 +1,242 @@
 [
-    {
-        "question" : "Voila la question1 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
-    },
-    {
-        "question" : "Voila la question2 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
-    },
-    {
-        "question" : "Voila la question3 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
-    },
-    {
-        "question" : "Voila la question4 ?", 
-        "réponseA" : "aaaa", 
-        "réponseB" : "bbbb", 
-        "réponseC" : "cccc", 
-        "réponse" : 2, 
-        "indice" :"l’indice !"
-    }
+  {
+    "question": "À quelle ligne se trouve l'erreur dans cette fonction ?\n1: def outer():\n2:   x = 10\n3:   def inner():\n4:     x += 1\n5:     return x\n6:   return inner()",
+    "réponseA": "Ligne 2",
+    "réponseB": "Ligne 4",
+    "réponseC": "Ligne 6",
+    "réponse": 2,
+    "indice": "La ligne 4 lève une exception UnboundLocalError car x est modifié sans avoir été déclaré nonlocal."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur dans ce code ?\n1: def create_pair(a, b):\n2:   t1 = (a)\n3:   t2 = (b,)\n4:   return t1 + t2",
+    "réponseA": "Ligne 2",
+    "réponseB": "Ligne 3",
+    "réponseC": "Ligne 4",
+    "réponse": 3,
+    "indice": "Sur la ligne 2, (a) n'est pas un tuple mais un int. La ligne 4 lève donc un TypeError lors de l'addition."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur de syntaxe ?\n1: def process(data=[], target):\n2:   data.append(target)\n3:   return data",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Ligne 3",
+    "réponse": 1,
+    "indice": "Un paramètre sans valeur par défaut (target) ne peut pas suivre un paramètre ayant une valeur par défaut."
+  },
+  {
+    "question": "À quelle ligne l'exception sera-t-elle levée si keys est une liste ?\n1: def store_data(keys, value):\n2:   cache = {}\n3:   cache[keys] = value\n4:   return cache",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Ligne 3",
+    "réponse": 3,
+    "indice": "La ligne 3 provoque un TypeError: unhashable type: 'list' car une liste ne peut pas servir de clé dans un dictionnaire."
+  },
+  {
+    "question": "À quelle ligne l'erreur survient-elle ?\n1: def update_data():\n2:   tup = (1, 2, [3, 4])\n3:   tup[2] += [5]\n4:   return tup",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Ligne 3",
+    "réponse": 3,
+    "indice": "La ligne 3 lève un TypeError car un tuple est immuable et n'autorise pas l'affectation par index, même si la liste interne est modifiée."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur de signature de méthode ?\n1: class Processor:\n2:   @classmethod\n3:   def transform(data):\n4:     return data.strip()",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Ligne 3",
+    "réponse": 3,
+    "indice": "Une méthode décorée avec @classmethod doit prendre 'cls' comme premier argument."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur d'appel ?\n1: class Base:\n2:   def __init__(self):\n3:     super.__init__()\n4:     self.active = True",
+    "réponseA": "Ligne 2",
+    "réponseB": "Ligne 3",
+    "réponseC": "Ligne 4",
+    "réponse": 2,
+    "indice": "Il manque les parenthèses à super() sur la ligne 3 pour instancier l'objet proxy."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur d'appel de fonction ?\n1: def compute(a, b, c=10):\n2:   return a + b + c\n3: def run():\n4:   return compute(1, 2, a=3)",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Ligne 4",
+    "réponse": 3,
+    "indice": "La ligne 4 lève TypeError: compute() got multiple values for argument 'a' car 'a' reçoit déjà la valeur positionnelle 1."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur de syntaxe ?\n1: def get_func():\n2:   return lambda x: return x * 2",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Aucune erreur",
+    "réponse": 2,
+    "indice": "Le mot-clé 'return' est interdit à l'intérieur d'une fonction lambda."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur de portée de variable ?\n1: count = 0\n2: def increment():\n3:   nonlocal count\n4:   count += 1\n5:   return count",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 3",
+    "réponseC": "Ligne 4",
+    "réponse": 2,
+    "indice": "Le mot-clé 'nonlocal' sert pour les variables d'une fonction englobante. Ici 'count' est globale, il fallait utiliser 'global'."
+  },
+  {
+    "question": "À quelle ligne se trouve le conflit de définition ?\n1: class Base:\n2:   __slots__ = ('x',)\n3: class Derived(Base):\n4:   __slots__ = ('x',)",
+    "réponseA": "Ligne 2",
+    "réponseB": "Ligne 3",
+    "réponseC": "Ligne 4",
+    "réponse": 3,
+    "indice": "Redéfinir le même slot 'x' dans la classe fille sur la ligne 4 crée un conflit TypeError avec la classe mère."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur d'utilisation de syntaxe ?\n1: import math\n2: def calculate(x):\n3:   return math.sqrt[x]",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Ligne 3",
+    "réponse": 3,
+    "indice": "Les crochets [] servent pour le découpage ou l'indexation. Pour appeler la fonction sqrt, il faut utiliser des parenthèses (). La ligne 3 lève un TypeError."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur de syntaxe de guillemets ?\n1: def format_user(user):\n2:   return f'User: {user['name']}'",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Aucune erreur",
+    "réponse": 2,
+    "indice": "L'utilisation de guillemets simples à l'intérieur de l'expression f-string elle-même délimitée par des guillemets simples provoque une erreur de syntaxe."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur dans l'appel à isinstance ?\n1: def check_types(val):\n2:   return isinstance(val, [int, float])",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Aucune erreur",
+    "réponse": 2,
+    "indice": "Le deuxième argument de isinstance doit être un type ou un tuple de types, et non une liste."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur de syntaxe de compréhension ?\n1: def make_set(items):\n2:   return {x, x**2 for x in items}",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Aucune erreur",
+    "réponse": 2,
+    "indice": "La ligne 2 mélange la syntaxe d'un ensemble statique séparé par une virgule et une compréhension d'ensemble."
+  },
+  {
+    "question": "À quelle ligne l'exception AttributeError sera-t-elle levée ?\n1: def get_sorted_copy(data):\n2:   cleaned = data.copy()\n3:   result = cleaned.sort()\n4:   return result.append(0)",
+    "réponseA": "Ligne 2",
+    "réponseB": "Ligne 3",
+    "réponseC": "Ligne 4",
+    "réponse": 3,
+    "indice": "La méthode sort() trie la liste sur place et renvoie None. Sur la ligne 4, result vaut None et ne possède donc pas de méthode append()."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur de structure du bloc try ?\n1: def process_data(x):\n2:   try:\n3:     res = 10 / x\n4:   finally:\n5:     print('done')\n6:   except ZeroDivisionError:\n7:     res = 0\n8:   return res",
+    "réponseA": "Ligne 4",
+    "réponseB": "Ligne 6",
+    "réponseC": "Ligne 7",
+    "réponse": 2,
+    "indice": "Le bloc 'except' doit obligatoirement être placé avant le bloc 'finally'."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur dans l'expression génératrice ?\n1: def sum_squares(n):\n2:   return sum(x**2 for x in range(n), start=0)",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Aucune erreur",
+    "réponse": 2,
+    "indice": "Une expression génératrice doit être entourée de ses propres parenthèses lorsqu'elle n'est pas le seul argument transmis à la fonction."
+  },
+  {
+    "question": "À quelle ligne se produit un conflit de nommage ?\n1: def convert(str):\n2:   data = str.upper()\n3:   text = str(123)\n4:   return data + text",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Ligne 3",
+    "réponse": 3,
+    "indice": "Sur la ligne 1, le paramètre s'appelle 'str', masquant la fonction native str(). La ligne 3 lève donc TypeError: 'str' object is not callable."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur de type lors de l'itération ?\n1: def get_first(items):\n2:   return next(items)",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Aucune erreur",
+    "réponse": 2,
+    "indice": "Si items est une liste, la ligne 2 lève TypeError: 'list' object is not an iterator. Il faut la convertir avec iter(items)."
+  },
+  {
+    "question": "À quelle ligne l'exception TypeError survient-elle si data_set est un ensemble (set) ?\n1: import json\n2: def to_json(data_set):\n3:   return json.dumps(data_set)",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Ligne 3",
+    "réponse": 3,
+    "indice": "Les objets de type 'set' ne sont pas sérialisables en JSON par défaut, ce qui provoque une erreur TypeError sur la ligne 3."
+  },
+  {
+    "question": "À quelle ligne la définition du dataclass pose-t-elle problème ?\n1: from dataclasses import dataclass\n2: @dataclass\n3: class Config:\n4:   options: list = []",
+    "réponseA": "Ligne 2",
+    "réponseB": "Ligne 3",
+    "réponseC": "Ligne 4",
+    "réponse": 3,
+    "indice": "Dans un dataclass, attribuer directement une valeur par défaut mutable (comme une liste) sur la ligne 4 provoque un ValueError. Il faut utiliser field(default_factory=list)."
+  },
+  {
+    "question": "À quelle ligne se trouve l'erreur d'opération asynchrone ?\n1: async def fetch_data():\n2:   return 42\n3: async def main():\n4:   res = fetch_data()\n5:   return res + 10",
+    "réponseA": "Ligne 3",
+    "réponseB": "Ligne 4",
+    "réponseC": "Ligne 5",
+    "réponse": 3,
+    "indice": "La ligne 4 a omis le mot-clé 'await'. La variable 'res' contient une coroutine, donc l'addition sur la ligne 5 lève un TypeError."
+  },
+  {
+    "question": "À quelle ligne le dépaquetage échouera-t-il si pair vaut (1, 2) ?\n1: def parse_pair(pair):\n2:   a, b, c = pair\n3:   return a + b + c",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Ligne 3",
+    "réponse": 2,
+    "indice": "Le dépaquetage sur la ligne 2 lève ValueError: not enough values to unpack (expected 3, got 2)."
+  },
+  {
+    "question": "À quelle ligne le dépaquetage d'arguments par mots-clés échoue-t-il ?\n1: def build_dict():\n2:   kwargs = {1: 'a', 2: 'b'}\n3:   return dict(**kwargs)",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Ligne 3",
+    "réponse": 3,
+    "indice": "L'opérateur ** exige des clés de type chaîne de caractères (str). Les clés entières (1 et 2) de kwargs provoquent un TypeError sur la ligne 3."
+  },
+  {
+    "question": "À quelle ligne l'opération d'addition échouera-t-elle ?\n1: def process(*args, data=[]):\n2:   return args + data",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Aucune erreur",
+    "réponse": 2,
+    "indice": "*args produit un objet de type tuple. Sur la ligne 2, tenter d'additionner un tuple avec une liste provoque un TypeError."
+  },
+  {
+    "question": "À quelle ligne une récursion infinie se déclenche-t-elle ?\n1: class Counter:\n2:   def __init__(self, start=0):\n3:     self.count = start\n4:   def increment(self):\n5:     self.count += 1\n6:   @property\n7:   def count(self):\n8:     return self.count",
+    "réponseA": "Ligne 3",
+    "réponseB": "Ligne 6",
+    "réponseC": "Ligne 8",
+    "réponse": 3,
+    "indice": "Le getter de la propriété 'count' sur la ligne 8 s'appelle lui-même indéfiniment (RecursionError) au lieu d'accéder à un attribut interne tel que self._count."
+  },
+  {
+    "question": "À quelle ligne l'exception ZeroDivisionError sera-t-elle levée si values est une liste vide [] ?\n1: def compute_ratio(values):\n2:   total = sum(values)\n3:   return [v / total for v in values]",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Ligne 3",
+    "réponse": 3,
+    "indice": "Si values est une liste vide, sum(values) vaut 0 à la ligne 2. L'évaluation de la compréhension à la ligne 3 tente une division par zéro (v / total)."
+  },
+  {
+    "question": "À quelle ligne l'erreur de modification d'objet survient-elle ?\n1: def modify_string(text):\n2:   text[0] = 'A'\n3:   return text",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Ligne 3",
+    "réponse": 2,
+    "indice": "Les chaînes de caractères (str) sont immuables en Python. L'affectation d'un élément par indexation sur la ligne 2 lève un TypeError."
+  },
+  {
+    "question": "À quelle ligne l'exception ValueError sera-t-elle levée si items contient ['1', '2', '3a'] ?\n1: def convert_all(items):\n2:   return list(map(int, items))",
+    "réponseA": "Ligne 1",
+    "réponseB": "Ligne 2",
+    "réponseC": "Aucune erreur",
+    "réponse": 2,
+    "indice": "La conversion de la chaîne '3a' en entier via int() échoue sur la ligne 2 avec un ValueError."
+  }
 ]
