@@ -58,18 +58,18 @@ def modifier_score_joueur(salle:str, player_id:int, player_score:int):
 
 
 def ajouter_joueur_action():
-    print("♫ Bienvenu ! ♪")
-    print("Combien de joueur vons jouer ? [1 - 50]")
+    print("||   ♫ Bienvenu ! ♪   ||")
+    print("[?]  Combien de joueur vons jouer ? [1 - 50]")
     nombre = 0
     while (nombre <= 0 or nombre > 50):
         nombre = int(input("> "))
-    print("")
+    print("\n • - • - • - • - • - • - • - • \n")
     for i in range(1, nombre+1):
-        print(f"Bienvenu joueur {nombre} ! ♪ Comment te nomme tu ?")
+        print(f"Bienvenu joueur {nombre} ! \n[?]  Comment te nomme tu ?")
         nom = ""
         while (len(nom) < 3 or len(nom) > 20):
             nom = input("> ")
         ajouter_joueur({"name": nom, "score_salle_1": 0, "score_salle_2": 0, "score_salle_3": 0, "id_partie" : id_partie})
-        print("")
+        print("\n • - • - • - • - • - • - • - • \n")
 
 ajouter_joueur_action()
