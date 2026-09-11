@@ -135,22 +135,22 @@ def delete_player(player_id: int):
     
     return {"error": "Joueur non trouvé"}, 404
 
-@app.put("/players/score/{player_id}/{score}")
-def put_players_score(player_id:int, score:int):
+@app.put("/players/{salle}/{player_id}/{score}")
+def put_players_score(salle : str, player_id:int, score:int):
+    nom_clef = 'score_salle_1'
+    if salle == "salle-2" :
+        nom_clef = 'score_salle_2'
+    elif salle == "salle-3" :
+        nom_clef = 'score_salle_3'
+    else :
+        salle = "salle-1"
+
     player_id = identifiant_position_player(player_id)
 
-    if player_id != -1 :
-        players[player_id]["score"] = score
-        return {"message": "Le score du joueur à été mis à jours !"}
-                
-    return {"error": "Joueur non trouvé"}, 404
-
-@app.put("/players/level/{player_id}/{level}")
-def put_player_level(player_id:int, level:int):
-    player_id = identifiant_position_player(player_id)
+    score = max(score, 0)
 
     if player_id != -1 :
-        players[player_id]["level"] = level
-        return {"message": "Le niveau du joueur à été mis à jours !"}
+        players[player_id][nom_clef] = score
+        return {"message": f"Le score de {nom_clef} du joueur {player_id} à été mis à jours !"}
 
     return {"error": "Joueur non trouvé"}, 404
