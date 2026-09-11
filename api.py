@@ -208,3 +208,49 @@ def put_players_score(id_partie:str, salle : str, player_id:int, score:int):
 
         return {"error": "Joueur non trouvé"}, 404
     return {"error": "Données du jeu introuvable"}, 404
+
+
+# ○----------------------------- ♣ ÉDIT QUESTION ♣ -----------------------------○
+
+class Question(BaseModel):
+    question: str = Field(min_length=5)
+    réponseA: str = Field(min_length=3)
+    réponseB: str = Field(min_length=3)
+    réponseC: str = Field(min_length=3)
+    réponse: int = Field(ge=0)
+    indice: str = Field(min_length=5)
+    salle: int = Field(ge=1)
+
+@app.post("/question")
+def ajout_question(question : Question):
+    fichierJSON = "question-salle-1.json"
+    if question == 2 :
+        fichierJSON = "question-salle-2.json"
+    elif question == 3 :
+        fichierJSON = "question-salle-3.json"
+    else :
+        question.salle = 1
+
+    donnees = []
+    with open(fichierJSON, 'r', encoding='utf-8') as fichier:
+        donnees = json.load(fichier)
+        donnees.append(question)
+        print(donnees)
+
+    with open(fichierJSON, 'w') as fichier:
+        json.dump(donnees, fichier, indent=4)
+    
+    return {"message": "Enregistrement réussi"}
+    # return {"error": "Erreur"}, 404
+
+    
+
+
+
+
+
+
+
+
+
+

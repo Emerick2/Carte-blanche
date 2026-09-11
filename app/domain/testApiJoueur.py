@@ -56,6 +56,18 @@ def modifier_score_joueur(salle:str, player_id:int, player_score:int):
 # # Pour le put :
 # modifier_score_joueur("salle-1",1,20)
 
+url = f"{baseURL}/question"
+payload = {
+    "question": "A SUPRIMER",
+    "réponseA": "C'est le 1",
+    "réponseB": "Comme la réponse A",
+    "réponseC": "Réponse = 3%2 ☺",
+    "réponse": 1,
+    "indice": "C'est UN nombre, UN !",
+    "salle":1
+},
+response = requests.post(url, json=payload)
+print(response.json())
 
 def ajouter_joueur_action():
     print("||   ♫ Bienvenu ! ♪   ||")
