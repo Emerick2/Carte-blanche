@@ -2,7 +2,7 @@ import json
 from fastapi import FastAPI
 import random
 from pydantic import BaseModel, Field
-import io, hashlib, hmac
+import hashlib, hmac
 
 app = FastAPI()
 
