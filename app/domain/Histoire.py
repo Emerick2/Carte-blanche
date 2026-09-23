@@ -56,7 +56,7 @@ CHAPITRES_PAR_DEFAUT: list[Chapitre] = [
         texte_sortie="Les lucioles s'eteignent. Un couloir sombre apparait vers la salle 2.",
     ),
     Chapitre(
-        id_partie=2,
+      id_partie=2,
         titre="Salle 2 - Le typage",
         texte=(
             "Salle 2. Les murs sont couverts d'annotations : int, str, list[int], Optional.\n"
