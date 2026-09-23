@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Crypto.Cipher import AES
+import io, hashlib, hmac
 
 class GameElement :
     def __init__(self, newId : str, name : str, description : str) :
@@ -33,13 +33,10 @@ class CodePuzzle(Puzzle):
 
 class HashPuzzle(Puzzle):
     def check_solution(self, answer : str) :
-        mes_parametres = AES.new('Ceci est une cle', AES.MODE_CBC, 'Ceci est un IV16')
-        texte_chiffre = mes_parametres.encrypt("Mon message super suuper secret.")
-        print(texte_chiffre)
-        # empreinte cryptographique
-        expected_hash : str = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"
-        # answer = answer avec empreinte criptographique.
-        return answer == expected_hash
+        mac1 = hmac.HMAC(b"key", b"somedata", digestmod=hashlib.sha512)
+        mac2 = hmac.HMAC(b"key", b"somedata", digestmod=hashlib.sha512)
+        return mac1.digest() == mac2.digest()
+
 
 HashPuzzle().check_solution("secret")
 
@@ -51,6 +48,4 @@ class Room :
         self.item = [] # Item[] 
         self.doors = [] # Door[] 
         self.puzzles = [] # Puzzle[] 
-
-
 
