@@ -1,17 +1,15 @@
 from .Question import Question
 
 class TypageCompliquer(Question):
-    def __init__(self) :
-        super().__init__()
+    def __init__(self, id_partie:str, idRéponse:int) :
+        super().__init__(id_partie, idRéponse)
         self.trouver_question(2)
 
     def afficher_la_question(self):
-        # idRéponse = self.gestionnaire_du_jeu.nombre_de_bonne_réponse
-        idRéponse = 1
         t = "\n"
         t += "  *  *  *  *\n"
         t += "==============\n"
-        t +=f"  QUESTION {idRéponse} \n"
+        t +=f"  QUESTION {self.idRéponse} \n"
         t += "==============\n\n"
         t += "  *  *  *  *\n"
         t +=f" | Question : {self._la_question}\n\n"

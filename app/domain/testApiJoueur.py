@@ -1,4 +1,5 @@
 import requests
+from question import *
 
 baseURL = "http://127.0.0.1:8000"
 débug = False
@@ -77,7 +78,7 @@ def ajouter_joueur_action():
         nombre = int(input("> "))
     print("\n • - • - • - • - • - • - • - • \n")
     for i in range(1, nombre+1):
-        print(f"Bienvenu joueur {nombre} ! \n[?]  Comment te nomme tu ?")
+        print(f"Bienvenu joueur {i} ! \n[?]  Comment te nomme tu ?")
         nom = ""
         while (len(nom) < 3 or len(nom) > 20):
             nom = input("> ")
@@ -85,3 +86,11 @@ def ajouter_joueur_action():
         print("\n • - • - • - • - • - • - • - • \n")
 
 ajouter_joueur_action()
+
+
+question = TypageSimple(id_partie,1)
+# print(question)
+question.afficher_la_question()
+question = TypageSimple(id_partie,2)
+question.afficher_la_question()
+

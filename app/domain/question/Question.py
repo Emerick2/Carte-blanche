@@ -4,7 +4,7 @@ import requests
 baseURL = "http://127.0.0.1:8000"
 
 class Question(ABC):
-    def __init__(self):
+    def __init__(self, id_partie:str, idRéponse:int):
         self._la_question = ""
         self._réponseA = "" 
         self._réponseB = ""
@@ -12,14 +12,19 @@ class Question(ABC):
         self._indice = ""
         self._numéro_réponse_attendu = 0
         self.gestionnaire_du_jeu = None
-
-    def trouver_question(self, id_partie:int):
-        global baseURL
+        self.id_partie = id_partie
+        self.idRéponse = idRéponse
         
-        url = "/question/salle-"
-        if id_partie == 2 :
+
+    def trouver_question(self, id_salle:int):
+        global baseURL
+
+        # @app.get("/question/{id_partie}/{salle}")
+
+        url = f"/question/{self.id_partie}/salle-"
+        if id_salle == 2 :
             url += "2"
-        elif id_partie == 3 :
+        elif id_salle == 3 :
             url += "3"
         else :
            url += "1"
@@ -66,7 +71,7 @@ class Question(ABC):
             print("\n Bravo ! C'est la bonne réponse !")
             # self.gestionnaire_du_jeu.victoire()
         else :
-            print(f"\n Eh non ! Se n'est pas la bonne réponse... C'était le {self._numéro_réponse_attendu}.\nMais ne désespère pas, tu finiras par y arrivé !")
+            print(f"\n Eh non ! Ce n'est pas la bonne réponse... C'était le {self._numéro_réponse_attendu}.\nMais ne désespère pas, tu finiras par y arrivé !")
             # self.gestionnaire_du_jeu.défaite()
 
     def afficher_indice(self):

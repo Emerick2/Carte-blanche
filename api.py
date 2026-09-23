@@ -224,9 +224,9 @@ class Question(BaseModel):
 @app.post("/question")
 def ajout_question(question : Question):
     fichierJSON = "question-salle-1.json"
-    if question == 2 :
+    if question.salle == 2 :
         fichierJSON = "question-salle-2.json"
-    elif question == 3 :
+    elif question.salle == 3 :
         fichierJSON = "question-salle-3.json"
     else :
         question.salle = 1
@@ -234,11 +234,11 @@ def ajout_question(question : Question):
     donnees = []
     with open(fichierJSON, 'r', encoding='utf-8') as fichier:
         donnees = json.load(fichier)
-        donnees.append(question)
+        donnees.append(question.model_dump())
         print(donnees)
 
-    with open(fichierJSON, 'w') as fichier:
-        json.dump(donnees, fichier, indent=4)
+    with open(fichierJSON, 'w', encoding='utf-8') as fichier:
+        json.dump(donnees, fichier, indent=4, ensure_ascii=False)
     
     return {"message": "Enregistrement réussi"}
     # return {"error": "Erreur"}, 404
