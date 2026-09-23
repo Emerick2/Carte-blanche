@@ -56,19 +56,26 @@ conda install abc
 - @app.put("/players/{id_partie}/{salle}/{player_id}/{score}")
 > Modifier le score d'une salle du jeu.
 
+### Routes liée à la gestion des gestion :
+- @app.post("/question")
+> Cela permet d'ajouter une question dans la liste des question.
 
+Structure d'une question :
+```python
+question: str = Field(min_length=5)
+réponseA: str = Field(min_length=3)
+réponseB: str = Field(min_length=3)
+réponseC: str = Field(min_length=3)
+réponse: int = Field(ge=0)
+indice: str = Field(min_length=5)
+salle: int = Field(ge=1)
+```
 
+- @app.delete("/question/{id_salle}/{id_question}")
+> Cela permet de supprimer la question sélectionné.
 
-
-
-
-
-
-
-
-
-
-
+- @app.put("/question/{id_salle}/{id_question}/{nouvelle_reponse}")
+> Cela permet de modifier le numéro de réponse à la question.
 
 
 

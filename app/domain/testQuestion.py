@@ -26,7 +26,14 @@ def requêteDelete(url:str):
     response = requests.delete(url)
     print(f"Réponse : {response.text}\n")
 
+def requêtePut(url:str):
+    url = f"{baseURL}{url}"
+    response = requests.put(url)
+    print(f"Réponse : {response.text}\n")
 
-# requêtePost("/question", {"question": "question titre", "réponseA": "réponse a", "réponseB": "réponse b", "réponseC": "réponse c", "réponse": 1, "indice": "texte indice", "salle": 1})
+
+requêtePost("/question", {"question": "question titre", "réponseA": "réponse a", "réponseB": "réponse b", "réponseC": "réponse c", "réponse": 1, "indice": "texte indice", "salle": 1})
+requêtePut("/question/1/30/3")
 requêteDelete("/question/1/30")
+
 
