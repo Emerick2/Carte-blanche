@@ -1,6 +1,10 @@
 from abc import ABC, abstractmethod
 import hashlib, hmac
 import requests
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ..GestionnaireDuJeu import GestionnaireDuJeu
 
 baseURL = "http://127.0.0.1:8000"
 
@@ -13,7 +17,7 @@ class Question(ABC):
         self._indice = ""
         self.__numéro_réponse_attendu = 0
         self._numéro_réponse_attendu_cripté = ""
-        self.gestionnaire_du_jeu = None
+        self.gestionnaire_du_jeu: "GestionnaireDuJeu | None" = None
         self.id_partie = id_partie
         self.idRéponse = idRéponse
         
@@ -64,7 +68,11 @@ class Question(ABC):
             choix = int(input("Votre choix : "))
 
         if choix != 0 :
-            self.réponse_à_la_question(choix)
+            if self.gestionnaire_du_jeu == None :
+                print("Le gestionnaire du jeu n'est pas valide.")
+                # self.réponse_à_la_question(choix)
+            else :
+                self.gestionnaire_du_jeu.verification_reponse(choix)
 
         # else self.gestionnaire_du_jeu.droit_à_indice > 0:
         if choix == 0 and peut_voir_indice :
