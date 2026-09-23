@@ -235,7 +235,6 @@ def ajout_question(question : Question):
     with open(fichierJSON, 'r', encoding='utf-8') as fichier:
         donnees = json.load(fichier)
         donnees.append(question.model_dump())
-        print(donnees)
 
     with open(fichierJSON, 'w', encoding='utf-8') as fichier:
         json.dump(donnees, fichier, indent=4, ensure_ascii=False)
@@ -244,13 +243,25 @@ def ajout_question(question : Question):
     # return {"error": "Erreur"}, 404
 
     
+@app.delete("/question/{id_salle}/{id_question}")
+def delete_question(id_salle:int, id_question:int):
+    if id_salle < 1 or id_salle > 3 :
+        id_salle = 1
 
+    fichierJSON = f"question-salle-{id_salle}.json"
 
+    donnees = []
+    with open(fichierJSON, 'r', encoding='utf-8') as fichier:
+        donnees = json.load(fichier)
+        if len(donnees) > id_question and id_question >= 0 :
+            donnees.pop(id_question)
+        else :
+            return {"message": f"Cette identifiant est invalide et n'est pas dans la plage des [0, {len(donnees)}[ questions valides."}
 
-
-
-
-
-
+    with open(fichierJSON, 'w', encoding='utf-8') as fichier:
+        json.dump(donnees, fichier, indent=4, ensure_ascii=False)
+    
+    return {"message": "Supression réussi"}
+    
 
 
