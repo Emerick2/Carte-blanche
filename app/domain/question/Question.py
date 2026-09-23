@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import hashlib, hmac
 import requests
 
 baseURL = "http://127.0.0.1:8000"
@@ -10,7 +11,8 @@ class Question(ABC):
         self._réponseB = ""
         self._réponseC = ""
         self._indice = ""
-        self._numéro_réponse_attendu = 0
+        self.__numéro_réponse_attendu = 0
+        self._numéro_réponse_attendu_cripté = ""
         self.gestionnaire_du_jeu = None
         self.id_partie = id_partie
         self.idRéponse = idRéponse
@@ -18,8 +20,6 @@ class Question(ABC):
 
     def trouver_question(self, id_salle:int):
         global baseURL
-
-        # @app.get("/question/{id_partie}/{salle}")
 
         url = f"/question/{self.id_partie}/salle-"
         if id_salle == 2 :
@@ -42,7 +42,11 @@ class Question(ABC):
                 self._réponseA = données["réponseA"]
                 self._réponseB = données["réponseB"]
                 self._réponseC = données["réponseC"]
-                self._numéro_réponse_attendu = données["réponse"]
+
+                self.__numéro_réponse_attendu = données["réponse"]
+                message_cripté = str(self.__numéro_réponse_attendu).encode("utf-8")
+                self._numéro_réponse_attendu_cripté = hmac.new(b"key", msg=message_cripté, digestmod=hashlib.sha512)
+                
                 self._indice = données["indice"]
 
     @abstractmethod
@@ -67,11 +71,13 @@ class Question(ABC):
             self.afficher_indice()
 
     def réponse_à_la_question(self, réponse:int):
-        if réponse == self._numéro_réponse_attendu:
+        message_cripté = str(réponse).encode("utf-8")
+        réponse_cripté = hmac.new(b"key", msg=message_cripté, digestmod=hashlib.sha512)
+        if réponse_cripté.digest() == self._numéro_réponse_attendu_cripté.digest():
             print("\n Bravo ! C'est la bonne réponse !")
             # self.gestionnaire_du_jeu.victoire()
         else :
-            print(f"\n Eh non ! Ce n'est pas la bonne réponse... C'était le {self._numéro_réponse_attendu}.\nMais ne désespère pas, tu finiras par y arrivé !")
+            print(f"\n Eh non ! Ce n'est pas la bonne réponse... C'était le {self.__numéro_réponse_attendu}.\nMais ne désespère pas, tu finiras par y arrivé !")
             # self.gestionnaire_du_jeu.défaite()
 
     def afficher_indice(self):
@@ -87,7 +93,7 @@ class Question(ABC):
         t += f"\n\tRéponse A : {self._réponseA}"
         t += f"\n\tRéponse B : {self._réponseB}"
         t += f"\n\tRéponse C : {self._réponseC}"
-        t += f"\n\tRéponse : {self._numéro_réponse_attendu}"
+        t += f"\n\tRéponse : {self.__numéro_réponse_attendu}"
         t += f"\n\tIndice : {self._indice}"
         return t
 
