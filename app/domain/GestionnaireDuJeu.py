@@ -18,6 +18,7 @@ class GestionnaireDuJeu :
         self._questions_posees = 0
         self._questions_par_salle = 4
         self.id_partie = ""
+        self.listeNomJoueur : list[str] = []
         self.baseURL = "http://127.0.0.1:8000"
 
     def commencer_la_partie(self) : 
@@ -46,6 +47,11 @@ class GestionnaireDuJeu :
             self._questions_posees += 1
         else :
             print("La question était invalide.")
+
+    def mettre_à_jours_le_joueur(self, id_joueur:int, salle:int, score:int):
+        # @app.put("/players/{id_partie}/{salle}/{player_id}/{score}")
+        url : str = f"{self.baseURL}/players/{self.id_partie}/salle-{salle}/{id_joueur}/{score}"
+
 
     def verification_reponse(self, reponse_joueur): 
         if self._partie == 1 :
@@ -97,6 +103,7 @@ class GestionnaireDuJeu :
             while (len(nom) < 3 or len(nom) > 20):
                 nom = input("> ")
             self.ajouter_joueur({"name": nom, "score_salle_1": 0, "score_salle_2": 0, "score_salle_3": 0, "id_partie" : self.id_partie})
+            self.listeNomJoueur.append(nom)
             print("\n • - • - • - • - • - • - • - • \n")
 
 
