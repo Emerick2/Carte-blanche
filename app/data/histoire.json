@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "titre": "Le reveil impossible",
+    "texte": "Tu t'endors devant ton cours de Python. Quand tu ouvres les yeux, ton ordinateur affiche : PROGRAMME DU REVE : EXECUTION BLOQUEE. Pour te reveiller, tu dois traverser trois salles.",
+    "texte_sortie": "Une premiere porte apparait. Le cauchemar commence."
+  },
+  {
+    "id": 1,
+    "titre": "Salle 1 - Les fondations des types",
+    "texte": "Des variables flottent autour de toi. Tu dois reconnaitre leur type : str, int, float, bool, list et tuple.",
+    "texte_sortie": "Tu comprends la nature des objets. Le passage vers la salle 2 s'ouvre."
+  },
+  {
+    "id": 2,
+    "titre": "Salle 2 - Le laboratoire des types caches",
+    "texte": "Dans ce laboratoire, les objets changent d'apparence. Tu dois reconnaitre les types generator, bytes, range, map, zip et lambda.",
+    "texte_sortie": "Tu comprends que les objets peuvent cacher leur vraie nature. La salle 3 s'ouvre."
+  },
+  {
+    "id": 3,
+    "titre": "Salle 3 - Le labyrinthe des erreurs",
+    "texte": "Des morceaux de code sont pieges. Tu dois trouver la ligne qui contient chaque erreur.",
+    "texte_sortie": "Le programme fonctionne enfin. Tu ouvres les yeux et tu te reveilles."
+  }
+]
