@@ -4,7 +4,7 @@ from question import *
 
 class GestionnaireDuJeu : 
     def __init__(self) :
-        self._partie = 2 
+        self._partie = 1
         self._score1 = 0
         self._score2 = 0 
         self._score3 = 0
@@ -25,8 +25,8 @@ class GestionnaireDuJeu :
         self.ajouter_joueur_action()
         self.id_partie = requests.get(f"{self.baseURL}/").json()
         hist = Histoire() 
-        self.nouvelle_question()
-        return hist.afficher_histoire(0) 
+        print(hist.afficher_histoire(0))
+        self.nouvelle_question() 
 
     def nouvelle_question(self): 
         self.quest : Question = None
@@ -43,8 +43,8 @@ class GestionnaireDuJeu :
         if (self.quest != None) :
             self.quest.gestionnaire_du_jeu = self
             self._question = self.quest
-            self.quest.afficher_la_question()
             self._questions_posees += 1
+            self.quest.afficher_la_question()
         else :
             print("La question était invalide.")
 
@@ -60,7 +60,7 @@ class GestionnaireDuJeu :
             self._total2 += 1 
         elif self._partie == 3 :
             self._total3 += 1
-        
+
         if self._question.réponse_à_la_question(reponse_joueur) : 
             if self._partie == 1 :
                 self._score1 += 1
@@ -70,21 +70,53 @@ class GestionnaireDuJeu :
                 self._score3 += 1
 
         input("\nCliquer pour continuer.")
-        self.nouvelle_question()
+        verif = self.verification_salle() 
+        if verif == None :
+            self.nouvelle_question()
+        else : 
+            print(verif)
+            if self._partie != 4 : 
+                self.nouvelle_question()
 
 
     def verification_salle(self) :
         hist = Histoire()
         if self._questions_posees == self._questions_par_salle :
+            if self._partie == 1 :
+                score_salle = self._score1 
+            elif self._partie == 2 : 
+                score_salle = self._score2
+            else : 
+                score_salle = self._score3
+
+            if score_salle < self._questions_par_salle : 
+                resultat = f"Tu as obtenu {score_salle} / {self._questions_par_salle}. Tu dois recommencer cette salle."
+                self._questions_posees = 0
+                if self._partie == 1 :
+                    self._score1 = 0
+                    self._total1 = 0
+                elif self._partie == 2 :
+                    self._score2 = 0
+                    self._total2 = 0
+                else : 
+                    self._score3 = 0
+                    self._total3 = 0 
+                return resultat
+
+
             texte_sortie = hist.afficher_sortie(self._partie)
             self._partie += 1
+            self._questions_posees = 0
+            self._total1 = 0
+            self._total2 = 0
+            self._total3 = 0
+
             if self._partie == 4 :
                 self._scoreTotal = self._score1 + self._score2 + self._score3
-                return texte_sortie + str(self._scoreTotal)
+                return texte_sortie + "\n" + str(self._scoreTotal)
             else :
                 texte_entrée = hist.afficher_histoire(self._partie)
-            self._questions_posees = 0 
-            return texte_sortie + texte_entrée
+                return texte_sortie + "\n" + texte_entrée
 
     def ajouter_joueur(self, payload):
         url = f"{self.baseURL}/players"
