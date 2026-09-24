@@ -18,6 +18,7 @@ class GestionnaireDuJeu :
         self._questions_posees = 0
         self._questions_par_salle = 4
         self.id_partie = ""
+        self.nom_joueur : str = ""
         self.baseURL = "http://127.0.0.1:8000"
 
     def commencer_la_partie(self) : 
@@ -46,6 +47,11 @@ class GestionnaireDuJeu :
             self._questions_posees += 1
         else :
             print("La question était invalide.")
+
+    def mettre_à_jours_le_joueur(self, id_joueur:int, salle:int, score:int):
+        # @app.put("/players/{id_partie}/{salle}/{player_id}/{score}")
+        url : str = f"{self.baseURL}/players/{self.id_partie}/salle-{salle}/{id_joueur}/{score}"
+
 
     def verification_reponse(self, reponse_joueur): 
         if self._partie == 1 :
@@ -86,18 +92,19 @@ class GestionnaireDuJeu :
 
     def ajouter_joueur_action(self):
         print("||   ♫ Bienvenu ! ♪   ||")
-        print("[?]  Combien de joueur vons jouer ? [1 - 50]")
-        nombre = 0
-        while (nombre <= 0 or nombre > 50):
-            nombre = int(input("> "))
+        # print("[?]  Combien de joueur vons jouer ? [1 - 50]")
+        # nombre = 0
+        # while (nombre <= 0 or nombre > 50):
+        #     nombre = int(input("> "))
+        # print("\n • - • - • - • - • - • - • - • \n")
+        # for i in range(1, nombre+1):
+        print(f"[?]  Comment te nomme tu ?")
+        nom = ""
+        while (len(nom) < 3 or len(nom) > 20):
+            nom = input("> ")
+        self.ajouter_joueur({"name": nom, "score_salle_1": 0, "score_salle_2": 0, "score_salle_3": 0, "id_partie" : self.id_partie})
+        self.nom_joueur = nom
         print("\n • - • - • - • - • - • - • - • \n")
-        for i in range(1, nombre+1):
-            print(f"Bienvenu joueur {i} ! \n[?]  Comment te nomme tu ?")
-            nom = ""
-            while (len(nom) < 3 or len(nom) > 20):
-                nom = input("> ")
-            self.ajouter_joueur({"name": nom, "score_salle_1": 0, "score_salle_2": 0, "score_salle_3": 0, "id_partie" : self.id_partie})
-            print("\n • - • - • - • - • - • - • - • \n")
 
 
 g = GestionnaireDuJeu()
