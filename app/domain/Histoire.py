@@ -1,4 +1,8 @@
 
+import json
+from pathlib import Path
+
+
 class Chapitre:
     """Le texte narratif d'UNE salle du cauchemar.
 
@@ -35,50 +39,6 @@ class Chapitre:
         return f"Chapitre({self.id_partie}, {self.titre!r})"
 
 
-CHAPITRES_PAR_DEFAUT: list[Chapitre] = [
-    Chapitre(
-        id_partie=0,
-        titre="Le reveil impossible",
-        texte=(
-            "Tu t'endors devant ton cours de Python... et tu ne te reveilles pas.\n"
-            "Tu ouvres les yeux dans une piece sans fenetre. La porte est verrouillee.\n"
-            "Une voix resonne : \"Reponds a mes questions, ou reste ici pour toujours.\""
-        ),
-        texte_sortie="Le verrou claque. La premiere porte s'ouvre lentement.",
-    ),
-    Chapitre(
-        id_partie=1,
-        titre="Salle 1 - Les fondations",
-        texte=(
-            "Salle 1. Des variables flottent dans l'air comme des lucioles.\n"
-            "Les questions portent sur les bases du langage : types, syntaxe, valeurs."
-        ),
-        texte_sortie="Les lucioles s'eteignent. Un couloir sombre apparait vers la salle 2.",
-    ),
-    Chapitre(
-        id_partie=2,
-        titre="Salle 2 - Le typage",
-        texte=(
-            "Salle 2. Les murs sont couverts d'annotations : int, str, list[int], Optional.\n"
-            "Ici, une erreur de type peut te couter ton reveil."
-        ),
-        texte_sortie="Les annotations se figent en vert. La derniere porte grince.",
-    ),
-    Chapitre(
-        id_partie=3,
-        titre="Salle 3 - La POO",
-        texte=(
-            "Salle 3, la derniere. Des classes geantes tournent autour de toi :\n"
-            "heritage, polymorphisme, methodes abstraites. Le cauchemar joue sa derniere carte."
-        ),
-        texte_sortie=(
-            "Tu ouvres les yeux. Ton clavier est encore chaud.\n"
-            "Tu t'es reveille. Fin du cauchemar."
-        ),
-    ),
-]
-
-
 class Histoire:
     """Recueil des chapitres. Retrouve le bon texte a partir d'un id_partie.
 
@@ -87,10 +47,21 @@ class Histoire:
     """
 
     def __init__(self, chapitres: list[Chapitre] | None = None) -> None:
-      
-        source = chapitres if chapitres is not None else CHAPITRES_PAR_DEFAUT
+        if chapitres is None:
+            chemin = Path(__file__).parents[1] / "data" / "histoire.json"
+            with chemin.open(encoding="utf-8") as fichier:
+                données = json.load(fichier)
+            chapitres = [
+                Chapitre(
+                    id_partie=chapitre["id"],
+                    titre=chapitre["titre"],
+                    texte=chapitre["texte"],
+                    texte_sortie=chapitre["texte_sortie"],
+                )
+                for chapitre in données
+            ]
 
-        self._chapitres: dict[int, Chapitre] = {c.id_partie: c for c in source}
+        self._chapitres: dict[int, Chapitre] = {c.id_partie: c for c in chapitres}
 
     def trouver_chapitre(self, id_partie: int) -> Chapitre:
         """Renvoie le chapitre demande, ou leve ValueError s'il n'existe pas."""
@@ -126,25 +97,3 @@ class Histoire:
         """Chapitre au format JSON, pret pour un endpoint FastAPI."""
         return self.trouver_chapitre(id_partie).to_dict()
 
-
-# ---------------------------------------------------------------------------
-# Demonstration manuelle : python3 app/domain/histoire.py
-# ---------------------------------------------------------------------------
-if __name__ == "__main__":
-    histoire = Histoire()
-
-    print(f"Nombre de salles : {histoire.nombre_de_salles()}\n")
-
-    for ligne in histoire.lister():
-        print(ligne)
-
-    print()
-    print(histoire.afficher_histoire(0))
-    print()
-    print(histoire.afficher_sortie(0))
-
-    print("\n--- Cas d'erreur ---")
-    try:
-        histoire.afficher_histoire(99)
-    except ValueError as erreur:
-        print(f"ValueError attrapee : {erreur}")
