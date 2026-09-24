@@ -3,6 +3,10 @@ from fastapi import APIRouter, HTTPException
 from app.services.données_services import données_du_jeu, identifiant_position_partie, nombre_aléatoire_avec_liste_à_ignorer
 from app.models.question import Question
 from app.services.question_service import modification_reponse_question, suppresion_question, ajout_question, chemin_questions
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename='api.log', encoding='utf-8', level=logging.DEBUG)
 
 router = APIRouter(
     prefix='/question',
@@ -13,6 +17,7 @@ router = APIRouter(
 def salle_liste(salle : str) :
     with open(chemin_questions(salle), 'r', encoding='utf-8') as fichier:
         donnees = json.load(fichier)
+        logger.info(f"La liste des question de la {salle} à été envoyé")
         return donnees
 
 @router.get("/{id_partie}/{salle}")
@@ -31,7 +36,9 @@ def salle_question(id_partie:str, salle : str) :
             identifiant_aléatoire = nombre_aléatoire_avec_liste_à_ignorer(donnees, données_du_jeu[id_partie]["déjà_vu"][salle])
             données_du_jeu[id_partie]["déjà_vu"][salle].append(identifiant_aléatoire)
 
+            logger.info("Une question à été posé.")
             return donnees[identifiant_aléatoire]
+    logger.warning("Données du jeu introuvable")
     raise HTTPException(status_code=404, detail="Données du jeu introuvable")
 
 @router.get("/chercher/{salle}/{question_id}")
@@ -49,26 +56,33 @@ def salle_question_id(salle : str, question_id : int) :
 def post_question(question : Question):
     réponse_api : str = ajout_question(question)
     if réponse_api != "" :
+        logger.warning(réponse_api)
         raise HTTPException(status_code=404, detail=réponse_api)
-    
+
+    logger.info("Une question à été ajouter dans la liste des question")
     return {"message": "Enregistrement réussi"}
     
 @router.delete("/{id_salle}/{id_question}")
 def delete_question(id_salle:int, id_question:int):
     réponse_api : str = suppresion_question(id_salle, id_question)
     if réponse_api != "" :
+        logger.warning(réponse_api)
         raise HTTPException(status_code=404, detail=réponse_api)
-    
+
+    logger.info("Une question de la liste des question à été supprimé")
     return {"message": "Supression réussi"}
 
 
 @router.put("/{id_salle}/{id_question}/{nouvelle_reponse}")
 def put_question_reponse(id_salle:int, id_question:int, nouvelle_reponse:int):
     if nouvelle_reponse < 1 or nouvelle_reponse > 3 :
+        logger.warning("La nouvelle réponse ne peut être que 1, 2 ou 3.")
         raise HTTPException(status_code=404, detail="La nouvelle réponse ne peut être que 1, 2 ou 3.")
 
     réponse_api : str = modification_reponse_question(id_salle, id_question, nouvelle_reponse)
     if réponse_api != "" :
+        logger.warning(réponse_api)
         raise HTTPException(status_code=404, detail=réponse_api)
-       
+
+    logger.info("La réponse de l'une des question à été modifié.")
     return {"message": "Modification réussie réussi"}
