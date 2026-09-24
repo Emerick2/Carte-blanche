@@ -38,7 +38,7 @@ conda install abc
 - @app.get("/question/{id_partie}/{salle}")
 > Permet de voir une question pseudo-aléatoire d'une salle.
 
-- @app.get("/question-spécifique/{salle}/{question_id}")
+- @app.get("/question/chercher/{salle}/{question_id}")
 > Permet de voir une question en particulier d'une salle.
 
 ### Routes liée à la gestion des joueurs :

@@ -37,5 +37,5 @@ echo ""
 
 # -------------------------------------------------------
 echo "Voir une question spécifique :"
-code_http=$(curl --silent --output /dev/null --write-out "%{http_code}" "${url}/question-spécifique/salle-1/1")
+code_http=$(curl --silent --output /dev/null --write-out "%{http_code}" "${url}/question/chercher/salle-1/1")
 ./messageErreur.sh $code_http 200

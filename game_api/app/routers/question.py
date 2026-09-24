@@ -42,8 +42,6 @@ def salle_question(id_partie:str, salle : str) :
             return donnees[identifiant_aléatoire]
     raise HTTPException(status_code=404, detail="Données du jeu introuvable")
 
-
-# J'ai renommé ce chemain, à modifier plus tard.
 @router.get("/chercher/{salle}/{question_id}")
 def salle_question_id(salle : str, question_id : int) :
     with open(chemin_questions(salle), 'r', encoding='utf-8') as fichier:
@@ -92,7 +90,6 @@ def delete_question(id_salle:int, id_question:int):
 def put_question_reponse(id_salle:int, id_question:int, nouvelle_reponse:int):
     if nouvelle_reponse < 1 or nouvelle_reponse > 3 :
         raise HTTPException(status_code=404, detail="La nouvelle réponse ne peut être que 1, 2 ou 3.")
-
     
     if id_salle < 1 or id_salle > 3 :
         id_salle = 1
