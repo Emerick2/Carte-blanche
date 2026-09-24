@@ -17,6 +17,7 @@ class GestionnaireDuJeu :
         self._question :Question = None
         self._questions_posees = 0
         self._questions_par_salle = 4
+        self.bonne_réponse_pour_passer = 2
         self.id_partie = ""
         self.nom_joueur : str = ""
         self.baseURL = "http://127.0.0.1:8000"
@@ -26,6 +27,8 @@ class GestionnaireDuJeu :
         self.id_partie = requests.get(f"{self.baseURL}/").json()
         hist = Histoire() 
         print(hist.afficher_histoire(0))
+        print(f"\nPour passer à la salle suivante, vous devez répondre correctement à au moins {self.bonne_réponse_pour_passer} réponses sur {self._questions_par_salle}.")
+        input("\nCliquer pour continuer.")
         self.nouvelle_question() 
 
     def nouvelle_question(self): 
@@ -89,7 +92,7 @@ class GestionnaireDuJeu :
             else : 
                 score_salle = self._score3
 
-            if score_salle < self._questions_par_salle : 
+            if score_salle < self.bonne_réponse_pour_passer : 
                 resultat = f"Tu as obtenu {score_salle} / {self._questions_par_salle}. Tu dois recommencer cette salle."
                 self._questions_posees = 0
                 if self._partie == 1 :
@@ -116,6 +119,7 @@ class GestionnaireDuJeu :
                 return texte_sortie + "\n" + str(self._scoreTotal)
             else :
                 texte_entrée = hist.afficher_histoire(self._partie)
+                input("\nCliquer pour continuer.")
                 return texte_sortie + "\n" + texte_entrée
 
     def ajouter_joueur(self, payload):
@@ -137,6 +141,29 @@ class GestionnaireDuJeu :
         self.ajouter_joueur({"name": nom, "score_salle_1": 0, "score_salle_2": 0, "score_salle_3": 0, "id_partie" : self.id_partie})
         self.nom_joueur = nom
         print("\n • - • - • - • - • - • - • - • \n")
+
+        print(f"[?]  Quel niveau de diffiuclté veut-tu avoir ?")
+        print("1 | ♥ Facile")
+        print("2 | ♣ Normal")
+        print("3 | ♠ Difficile")
+        print("4 | ♦ Cauchemardesque")
+        choix = ""
+        while (choix != "1" or choix != "2" or choix != "3" or choix != "4"):
+            choix = input("> ")
+
+        if (choix == "1") :
+            self._questions_par_salle = 4
+            self.bonne_réponse_pour_passer = 2
+        if (choix == "2") :
+            self._questions_par_salle = 4
+            self.bonne_réponse_pour_passer = 3
+        if (choix == "3") :
+            self._questions_par_salle = 4
+            self.bonne_réponse_pour_passer = 4
+        if (choix == "4") :
+            self._questions_par_salle = 20
+            self.bonne_réponse_pour_passer = 18
+
 
 
 g = GestionnaireDuJeu()

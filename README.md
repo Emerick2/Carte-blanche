@@ -90,6 +90,15 @@ salle: int = Field(ge=1)
 > Cela permet de modifier le numéro de réponse à la question.
 
 
+### Routes liée à l'histoire :
+- @app.get("/histoire")
+> Lire tout le dossier de l'histoire.
+
+- @app.get("/histoire/{id_histoire}")
+> Lire un chapitre de l'histoire en fonction de son identifiant.
+
+- @app.get("/histoire/{id_histoire}/sortie")
+> Lire la fin du chapitre de l'histoire en fonction de l'identifiant de son chapitre.
 
 
 
