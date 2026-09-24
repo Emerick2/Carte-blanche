@@ -18,7 +18,6 @@ app.include_router(question_router)
 def début() :
     return aubtenir_un_identifiant_de_partie()
 
-
 # Je ne divise pas l'histoire puisque son API est en cours de réalisation, il faudras revenir pour le faire ulterieurement :
 
 CHEMIN_HISTOIRE = Path("app/data/histoire.json")
