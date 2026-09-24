@@ -83,10 +83,10 @@ class Question(ABC):
         réponse_cripté = hmac.new(b"key", msg=message_cripté, digestmod=hashlib.sha512)
         if réponse_cripté.digest() == self._numéro_réponse_attendu_cripté.digest():
             print("\n Bravo ! C'est la bonne réponse !")
-            # self.gestionnaire_du_jeu.victoire()
+            return True
         else :
             print(f"\n Eh non ! Ce n'est pas la bonne réponse... C'était le {self.__numéro_réponse_attendu}.\nMais ne désespère pas, tu finiras par y arrivé !")
-            # self.gestionnaire_du_jeu.défaite()
+            return False
 
     def afficher_indice(self):
         # if self.gestionnaire_du_jeu.droit_à_indice > 0:
