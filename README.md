@@ -4,12 +4,12 @@ Il s’agit d’un jeu dans lequel nous incarnons une carte blanche qui doit tro
 # Lancer le projet :
 Ouvrir l'API :
 ```bash
-fastapi dev main.py
+fastapi dev api.py
 ```
 
-Ouvrir l'environnement de test :
+Démarrer le jeu :
 ```bash
-python testQuestion.py
+python ./app/domain/GestionnaireDuJeu.py
 ```
 
 # Instalation nécessaire :
