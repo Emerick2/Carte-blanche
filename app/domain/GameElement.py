@@ -33,12 +33,15 @@ class CodePuzzle(Puzzle):
 
 class HashPuzzle(Puzzle):
     def check_solution(self, answer : str) :
-        mac1 = hmac.HMAC(b"key", b"somedata", digestmod=hashlib.sha512)
-        mac2 = hmac.HMAC(b"key", b"somedata", digestmod=hashlib.sha512)
+        message_bytes = answer.encode("utf-8")
+        mac1 = hmac.new(b"key", msg=message_bytes, digestmod=hashlib.sha512)
+
+        message_bytes = "secret".encode("utf-8")
+        mac2 = hmac.new(b"key", msg=message_bytes, digestmod=hashlib.sha512)
         return mac1.digest() == mac2.digest()
 
 
-HashPuzzle().check_solution("secret")
+print(HashPuzzle().check_solution("secret"))
 
 class Room :
     def __init__(self):
