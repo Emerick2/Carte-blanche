@@ -34,7 +34,7 @@ conda install abc
 - @app.get("/question/{id_partie}/{salle}")
 > Permet de voir une question pseudo-aléatoire d'une salle.
 
-- @app.get("/question/{salle}/{question_id}")
+- @app.get("/question-spécifique/{salle}/{question_id}")
 > Permet de voir une question en particulier d'une salle.
 
 ### Routes liée à la gestion des joueurs :
@@ -49,6 +49,14 @@ conda install abc
 
 - @app.post("/players")
 > Ajouter un joueur dans la partie (prend en paramètre un objet de type "Player").
+Structure d'un joueur (Player) :
+```python
+name: str = Field(min_length=3)
+score_salle_1: int = Field(ge=0)
+score_salle_2: int = Field(ge=0)
+score_salle_3: int = Field(ge=0)
+id_partie: str
+```
 
 - @app.delete("/players/{id_partie}/{player_id}")
 > Supprimer un joueur de la partie.

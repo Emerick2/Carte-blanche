@@ -107,9 +107,9 @@ def salle_question(id_partie:str, salle : str) :
             données_du_jeu[id_partie]["déjà_vu"][salle].append(identifiant_aléatoire)
 
             return donnees[identifiant_aléatoire]
-    return {"error": "Données du jeu introuvable"}, 404
+    raise HTTPException(status_code=404, detail="Données du jeu introuvable")
     
-@app.get("/question/{salle}/{question_id}")
+@app.get("/question-spécifique/{salle}/{question_id}")
 def salle_question_id(salle : str, question_id : int) :
     fichier_json = 'question-salle-1.json'
     if salle == "salle-2" :
@@ -135,7 +135,7 @@ def get_players(id_partie:str):
     id_partie = identifiant_position_partie(id_partie)
     if (id_partie != -1) :
         return données_du_jeu[id_partie]["players"]
-    return {"error": "Données du jeu introuvable"}, 404
+    raise HTTPException(status_code=404, detail="Données du jeu introuvable")
 
 @app.get("/players/{id_partie}/{player_id}")
 def get_player(id_partie:str, player_id: int):
@@ -145,8 +145,8 @@ def get_player(id_partie:str, player_id: int):
         index_player = identifiant_position_player(player_id, id_partie)
         if index_player != -1 :
             return données_du_jeu[index_partie]["players"][index_player]
-        return {"error": "Player not found"}
-    return {"error": "Données du jeu introuvable"}, 404
+        raise HTTPException(status_code=404, detail="Player not found")
+    raise HTTPException(status_code=404, detail="Données du jeu introuvable")
 
 @app.get("/id/list/{id_partie}")
 def get_list_id(id_partie:str):
@@ -157,7 +157,7 @@ def get_list_id(id_partie:str):
         for i in range(len(données_du_jeu[id_partie]["players"])):
             tableau.append(données_du_jeu[id_partie]["players"][i]["id"])
         return tableau
-    return {"error": "Données du jeu introuvable"}, 404
+    raise HTTPException(status_code=404, detail="Données du jeu introuvable")
 
 @app.post("/players")
 def create_player(player: Player):
@@ -171,7 +171,7 @@ def create_player(player: Player):
         données_du_jeu[id_partie]["players"].append(new_player)
         return new_player
     
-    return {"error": "Données du jeu introuvable"}, 404
+    raise HTTPException(status_code=404, detail="Données du jeu introuvable")
 
 @app.delete("/players/{id_partie}/{player_id}")
 def delete_player(id_partie:str,player_id: int):
@@ -184,8 +184,8 @@ def delete_player(id_partie:str,player_id: int):
             données_du_jeu[index_partie]["players"].pop(index_player)
             return {"message": f"Joueur à l'index {index_player} supprimé"}
         
-        return {"error": "Joueur non trouvé"}, 404
-    return {"error": "Données du jeu introuvable"}, 404
+        raise HTTPException(status_code=404, detail="Joueur non trouvé")
+    raise HTTPException(status_code=404, detail="Données du jeu introuvable")
 
 @app.put("/players/{id_partie}/{salle}/{player_id}/{score}")
 def put_players_score(id_partie:str, salle : str, player_id:int, score:int):
@@ -208,8 +208,8 @@ def put_players_score(id_partie:str, salle : str, player_id:int, score:int):
             données_du_jeu[index_partie]["players"][index_player][nom_clef] = score
             return {"message": f"Le score de {nom_clef} du joueur {index_player} à été mis à jours !"}
 
-        return {"error": "Joueur non trouvé"}, 404
-    return {"error": "Données du jeu introuvable"}, 404
+        raise HTTPException(status_code=404, detail="Joueur non trouvé")
+    raise HTTPException(status_code=404, detail="Données du jeu introuvable")
 
 
 # ○----------------------------- ♣ ÉDIT QUESTION ♣ -----------------------------○
@@ -242,8 +242,6 @@ def ajout_question(question : Question):
         json.dump(donnees, fichier, indent=4, ensure_ascii=False)
     
     return {"message": "Enregistrement réussi"}
-    # return {"error": "Erreur"}, 404
-
     
 @app.delete("/question/{id_salle}/{id_question}")
 def delete_question(id_salle:int, id_question:int):
@@ -258,7 +256,7 @@ def delete_question(id_salle:int, id_question:int):
         if len(donnees) > id_question and id_question >= 0 :
             donnees.pop(id_question)
         else :
-            return {"message": f"Cette identifiant est invalide et n'est pas dans la plage des [0, {len(donnees)}[ questions valides."}
+            raise HTTPException(status_code=404, detail=f"Cette identifiant est invalide et n'est pas dans la plage des [0, {len(donnees)}[ questions valides.")
 
     with open(fichierJSON, 'w', encoding='utf-8') as fichier:
         json.dump(donnees, fichier, indent=4, ensure_ascii=False)
@@ -269,7 +267,8 @@ def delete_question(id_salle:int, id_question:int):
 @app.put("/question/{id_salle}/{id_question}/{nouvelle_reponse}")
 def put_question_reponse(id_salle:int, id_question:int, nouvelle_reponse:int):
     if nouvelle_reponse < 1 or nouvelle_reponse > 3 :
-        return {"message": "La nouvelle réponse ne peut être que 1, 2 ou 3."}
+        raise HTTPException(status_code=404, detail="La nouvelle réponse ne peut être que 1, 2 ou 3.")
+
     
     if id_salle < 1 or id_salle > 3 :
         id_salle = 1
@@ -282,8 +281,7 @@ def put_question_reponse(id_salle:int, id_question:int, nouvelle_reponse:int):
         if len(donnees) > id_question and id_question >= 0 :
             donnees[id_question]["réponse"] = nouvelle_reponse
         else :
-            return {"message": f"Cette identifiant est invalide et n'est pas dans la plage des [0, {len(donnees)}[ questions valides."}
-    
+            raise HTTPException(status_code=404, detail="Cette identifiant est invalide et n'est pas dans la plage des [0, {len(donnees)}[ questions valides.")
     with open(fichierJSON, 'w', encoding='utf-8') as fichier:
         json.dump(donnees, fichier, indent=4, ensure_ascii=False)
         
@@ -305,11 +303,7 @@ def obtenir_chapitre(id_histoire: int):
     for chapitre in histoire:
         if chapitre["id"] == id_histoire:
             return chapitre
-
-    raise HTTPException(
-        status_code=404,
-        detail="Cette histoire n'existe pas"
-    )
+    raise HTTPException(status_code=404, detail="Cette histoire n'existe pas")
 
 @app.get("/histoire/{id_histoire}/sortie")
 def obtenir_sortie(id_histoire: int):
