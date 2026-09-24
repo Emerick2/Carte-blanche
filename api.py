@@ -1,10 +1,14 @@
 import json
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import random
 from pydantic import BaseModel, Field
 import io, hashlib, hmac
+from pathlib import Path
+
+
 
 app = FastAPI()
+
 
 class Player(BaseModel):
     name: str = Field(min_length=3)
@@ -286,3 +290,33 @@ def put_question_reponse(id_salle:int, id_question:int, nouvelle_reponse:int):
         json.dump(donnees, fichier, indent=4, ensure_ascii=False)
         
     return {"message": "Modification réussie réussi"}
+
+
+
+CHEMIN_HISTOIRE = Path("app/data/histoire.json")
+
+@app.get("/histoire")
+def obtenir_histoire():
+    with open(CHEMIN_HISTOIRE, "r", encoding="utf-8") as fichier:
+        return json.load(fichier)
+    
+@app.get("/histoire/{id_histoire}")
+def obtenir_chapitre(id_histoire: int):
+    histoire = obtenir_histoire()
+
+    for chapitre in histoire:
+        if chapitre["id"] == id_histoire:
+            return chapitre
+
+    raise HTTPException(
+        status_code=404,
+        detail="Cette histoire n'existe pas"
+    )
+
+@app.get("/histoire/{id_histoire}/sortie")
+def obtenir_sortie(id_histoire: int):
+    chapitre = obtenir_chapitre(id_histoire)
+    return {
+        "id": chapitre["id"],
+        "texte_sortie": chapitre["texte_sortie"]
+    }
