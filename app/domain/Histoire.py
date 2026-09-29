@@ -43,34 +43,6 @@ class Histoire:
     (c'est le role de Chapitre).
     """
 
-    # def __init__(self) -> None:
-        # if chapitres is None:
-        #     chemin = Path(__file__).parents[1] / "data" / "histoire.json"
-        #     with chemin.open(encoding="utf-8") as fichier:
-        #         données = json.load(fichier)
-        #     chapitres = [
-        #         Chapitre(
-        #             id_partie=chapitre["id"],
-        #             titre=chapitre["titre"],
-        #             texte=chapitre["texte"],
-        #             texte_sortie=chapitre["texte_sortie"],
-        #         )
-        #         for chapitre in données
-        #     ]
-
-        # self._chapitres: dict[int, Chapitre] = {c.id_partie: c for c in chapitres}
-        
-        
-        # url=baseURL+"/histoire"
-        # réponse_http = requests.get(
-        #     url
-        # )
-        
-        # if réponse_http.status_code == 200:
-        #     données = réponse_http.json()
-        #     self._chapitres: données
-                
-
     def trouver_chapitre(self, id_partie: int) -> Chapitre:
         """Renvoie le chapitre demande, ou leve ValueError s'il n'existe pas."""
         url=baseURL+"/histoire/"+str(id_partie)
@@ -112,14 +84,7 @@ class Histoire:
 
     def afficher_sortie(self, id_partie: int) -> str:
         """Texte joue quand le joueur a repondu a toutes les questions de la salle."""
-        return self.trouver_chapitre(id_partie).texte_sortie
-
-    # def lister(self) -> list[str]:
-    #     """Resumes de tous les chapitres, dans l'ordre des id."""
-    #     resumes: list[str] = []
-    #     for id_partie in sorted(self._chapitres):
-    #         resumes.append(self._chapitres[id_partie].resume())
-    #     return resumes
+        return self.trouver_chapitre(id_partie)["texte_sortie"]
 
     def nombre_de_salles(self) -> int:
         url=baseURL+"/histoire"
@@ -131,8 +96,8 @@ class Histoire:
             données = réponse_http.json()
             if (données != None) :
                 return len(données)
-            
-        return 0 # En cas d'erreur.
+
+        return 0
 
     def to_dict(self, id_partie: int) -> dict:
         """Chapitre au format JSON, pret pour un endpoint FastAPI."""

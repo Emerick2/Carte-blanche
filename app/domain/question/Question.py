@@ -78,7 +78,7 @@ class Question(ABC):
         if choix == 0 and peut_voir_indice :
             self.afficher_indice()
 
-    def réponse_à_la_question(self, réponse:int):
+    def réponse_à_la_question(self, réponse:int) -> bool:
         message_cripté = str(réponse).encode("utf-8")
         réponse_cripté = hmac.new(b"key", msg=message_cripté, digestmod=hashlib.sha512)
         if réponse_cripté.digest() == self._numéro_réponse_attendu_cripté.digest():

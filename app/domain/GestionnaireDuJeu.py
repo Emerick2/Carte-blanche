@@ -72,28 +72,33 @@ class GestionnaireDuJeu :
             elif self._partie == 3 :
                 self._score3 += 1
 
-        input("\nCliquer pour continuer.")
         verif = self.verification_salle() 
         if verif == None :
+            input("\nCliquer pour continuer.")
             self.nouvelle_question()
         else : 
             print(verif)
-            if self._partie != 4 : 
+            input("\nCliquer pour continuer.")
+            if self._partie != self._questions_par_salle : 
                 self.nouvelle_question()
 
 
     def verification_salle(self) :
+        if self._partie == 1 :
+            score_salle = self._score1 
+        elif self._partie == 2 : 
+            score_salle = self._score2
+        else : 
+            score_salle = self._score3
+        
+        resultat = f"Tu as obtenu {score_salle} / {self._questions_par_salle}."
+        print("\n"+resultat)
+
         hist = Histoire()
         if self._questions_posees == self._questions_par_salle :
-            if self._partie == 1 :
-                score_salle = self._score1 
-            elif self._partie == 2 : 
-                score_salle = self._score2
-            else : 
-                score_salle = self._score3
 
             if score_salle < self.bonne_réponse_pour_passer : 
-                resultat = f"Tu as obtenu {score_salle} / {self._questions_par_salle}. Tu dois recommencer cette salle."
+                resultat = "Tu dois recommencer cette salle."
                 self._questions_posees = 0
                 if self._partie == 1 :
                     self._score1 = 0
@@ -105,8 +110,7 @@ class GestionnaireDuJeu :
                     self._score3 = 0
                     self._total3 = 0 
                 return resultat
-
-
+            
             texte_sortie = hist.afficher_sortie(self._partie)
             self._partie += 1
             self._questions_posees = 0
@@ -114,7 +118,7 @@ class GestionnaireDuJeu :
             self._total2 = 0
             self._total3 = 0
 
-            if self._partie == 4 :
+            if self._partie == self._questions_par_salle :
                 self._scoreTotal = self._score1 + self._score2 + self._score3
                 return texte_sortie + "\n" + str(self._scoreTotal)
             else :
