@@ -15,6 +15,7 @@ python ./app/domain/GestionnaireDuJeu.py
 
 # Lancer les tests :
 ```bash
+cd test/
 ./test.sh
 ```
 

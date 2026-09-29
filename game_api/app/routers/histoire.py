@@ -11,7 +11,9 @@ router = APIRouter(
     tags=['histoire'],
 )
 
-CHEMIN_HISTOIRE = Path("../../../app/data/histoire.json")
+# CHEMIN_HISTOIRE = Path("../../../app/data/histoire.json")
+# chemin = Path(__file__).parents[1] / "data" / "histoire.json"
+CHEMIN_HISTOIRE = Path(__file__).resolve().parents[3] / "app" / "data" / "histoire.json"
 
 @router.get("")
 def obtenir_histoire():
