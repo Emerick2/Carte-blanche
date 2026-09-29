@@ -148,7 +148,7 @@ class GestionnaireDuJeu :
         print("3 | ♠ Difficile")
         print("4 | ♦ Cauchemardesque")
         choix = ""
-        while (choix != "1" or choix != "2" or choix != "3" or choix != "4"):
+        while (choix != "1" and choix != "2" and choix != "3" and choix != "4"):
             choix = input("> ")
 
         if (choix == "1") :
