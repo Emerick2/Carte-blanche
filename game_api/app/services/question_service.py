@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from app.models.question import Question
 
-RÉPERTOIRE_DU_PROJET = Path(__file__).resolve().parents[3]
+RÉPERTOIRE_DU_PROJET = Path(__file__).resolve().parents[3] / "app" / "data"
 
 def chemin_questions(salle: str | int) -> Path:
     numéro_salle = int(salle) if str(salle).isdigit() else int(str(salle).split("-")[-1])
