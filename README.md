@@ -3,11 +3,13 @@
 # Lancer le projet :
 Ouvrir l'API :
 ```bash
+cd game_api/app/
 fastapi dev api.py
 ```
 
 Démarrer le jeu :
 ```bash
+cd app/domain/
 python ./app/domain/GestionnaireDuJeu.py
 ```
 
