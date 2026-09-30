@@ -8,7 +8,7 @@ class TypageSimple(Question):
     def afficher_la_question(self):
         t = "\n"
         t += "==============\n"
-        t +=f"  QUESTION {self.idRéponse} \n"
+        t +=f"  QUESTION {self.id_réponse} \n"
         t += "==============\n\n"
         t +=f" | Question : {self._la_question}\n\n"
         t += "Quel est le numéro de la bonne réponse ?\n"

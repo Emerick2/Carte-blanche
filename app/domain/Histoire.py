@@ -15,10 +15,10 @@ class Chapitre:
         texte: str,
         texte_sortie: str = "",
     ) -> None:
-        self.id_partie = id_partie
-        self.titre = titre
-        self.texte = texte          # texte joue a l'entree de la salle
-        self.texte_sortie = texte_sortie  # texte joue quand la porte s'ouvre
+        self.id_partie : int = id_partie
+        self.titre : str = titre
+        self.texte : str = texte          # texte joue a l'entree de la salle
+        self.texte_sortie : str = texte_sortie  # texte joue quand la porte s'ouvre
 
     def resume(self) -> str:
         """Ligne courte pour les menus et les logs. Ex: '[1] Salle 1'."""

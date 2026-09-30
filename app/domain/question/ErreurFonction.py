@@ -11,7 +11,7 @@ class ErreurFonction(Question):
         t += "     *****\n"
         t += "   *********\n"
         t += "===============\n"
-        t +=f"  QUESTION {self.idRéponse} \n"
+        t +=f"  QUESTION {self.id_réponse} \n"
         t += "===============\n"
         t += "   *********\n"
         t += "     *****\n"

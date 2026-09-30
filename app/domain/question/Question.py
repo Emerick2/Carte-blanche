@@ -9,17 +9,17 @@ if TYPE_CHECKING:
 baseURL = "http://127.0.0.1:8000"
 
 class Question(ABC):
-    def __init__(self, id_partie:str, idRéponse:int):
-        self._la_question = ""
-        self._réponseA = "" 
-        self._réponseB = ""
-        self._réponseC = ""
-        self._indice = ""
-        self.__numéro_réponse_attendu = 0
-        self._numéro_réponse_attendu_cripté = ""
-        self.gestionnaire_du_jeu: "GestionnaireDuJeu | None" = None
-        self.id_partie = id_partie
-        self.idRéponse = idRéponse
+    def __init__(self, id_partie:str, id_réponse:int):
+        self._la_question : str = ""
+        self._réponseA : str = "" 
+        self._réponseB : str = ""
+        self._réponseC : str = ""
+        self._indice : str = ""
+        self.__numéro_réponse_attendu : int = 0
+        self._numéro_réponse_attendu_cripté : str = ""
+        self.gestionnaire_du_jeu : "GestionnaireDuJeu | None" = None
+        self.id_partie : str = id_partie
+        self.id_réponse : int = id_réponse
         
 
     def trouver_question(self, id_salle:int):
@@ -57,14 +57,14 @@ class Question(ABC):
     def afficher_la_question(self):
         pass
 
-    def en_attente_de_la_réponse_du_joeur(self, nombreMaximum, peut_voir_indice) :
+    def en_attente_de_la_réponse_du_joeur(self, nombre_maximum : int, peut_voir_indice : bool) :
         choix = -1
         nombreMinimum = 1
         # if self.gestionnaire_du_jeu.droit_à_indice > 0:
         if peut_voir_indice :
             nombreMinimum = 0
 
-        while choix < nombreMinimum or choix > nombreMaximum :
+        while choix < nombreMinimum or choix > nombre_maximum :
             choix = int(input("Votre choix : "))
 
         if choix != 0 :

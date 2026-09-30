@@ -51,7 +51,7 @@ conda install abc
 - @app.get("/players/{id_partie}/{player_id}")
 > Voir un joueur en particulier de la partie.
 
-- @app.get("/id/list/{id_partie}")
+- @app.get("/players/id/list/{id_partie}")
 > Afficher la liste des identifiants des joueurs existants dans la partie.
 
 - @app.post("/players")
