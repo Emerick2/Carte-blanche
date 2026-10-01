@@ -4,23 +4,23 @@ from question import *
 
 class GestionnaireDuJeu : 
     def __init__(self) :
-        self._partie = 1
-        self._score1 = 0
-        self._score2 = 0 
-        self._score3 = 0
-        self._total1 = 0
-        self._total2 = 0 
-        self._total3 = 0
-        self._scoreTotal = 0 
-        self._indices = 3
-        self._idHistoire = 0 
-        self._question :Question = None
-        self._questions_posees = 0
-        self._questions_par_salle = 4
-        self.bonne_réponse_pour_passer = 2
-        self.id_partie = ""
+        self._partie : int = 1
+        self._score1 : int = 0
+        self._score2 : int = 0 
+        self._score3 : int = 0
+        self._total1 : int = 0
+        self._total2 : int = 0 
+        self._total3 : int = 0
+        self._scoreTotal : int = 0 
+        self._indices : int = 3
+        self._idHistoire : int = 0 
+        self._question : Question = None
+        self._questions_posees : int = 0
+        self._questions_par_salle : int = 4
+        self.bonne_réponse_pour_passer : int = 2
+        self.id_partie : str = ""
         self.nom_joueur : str = ""
-        self.baseURL = "http://127.0.0.1:8000"
+        self.baseURL : str = "http://127.0.0.1:8000"
 
     def commencer_la_partie(self) : 
         self.ajouter_joueur_action()
@@ -126,9 +126,9 @@ class GestionnaireDuJeu :
                 input("\nCliquer pour continuer.")
                 return texte_sortie + "\n" + texte_entrée
 
-    def ajouter_joueur(self, payload):
+    def ajouter_joueur(self, le_json):
         url = f"{self.baseURL}/players"
-        requests.post(url, json=payload)
+        requests.post(url, json=le_json)
 
     def ajouter_joueur_action(self):
         print("||   ♫ Bienvenu ! ♪   ||")

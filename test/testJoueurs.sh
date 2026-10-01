@@ -30,8 +30,8 @@ code_http=$(curl --silent --output /dev/null --write-out "%{http_code}" "${url}/
 
 # -------------------------------------------------------
 echo "Voir la liste des joueurs existants :"
-code_http=$(curl --silent --output /dev/null --write-out "%{http_code}" "${url}/id/list/${id_partie}")
-# curl -X GET "${url}/id/list/${id_partie}"
+code_http=$(curl --silent --output /dev/null --write-out "%{http_code}" "${url}/players/id/list/${id_partie}")
+# curl -X GET "${url}/players/id/list/${id_partie}"
 ./messageErreur.sh $code_http 200
 
 # -------------------------------------------------------
