@@ -1,0 +1,174 @@
+from Histoire import Histoire
+import requests
+from question import *
+
+class GestionnaireDuJeu : 
+    def __init__(self) :
+        self._partie : int = 1
+        self._score1 : int = 0
+        self._score2 : int = 0 
+        self._score3 : int = 0
+        self._total1 : int = 0
+        self._total2 : int = 0 
+        self._total3 : int = 0
+        self._scoreTotal : int = 0 
+        self._indices : int = 3
+        self._idHistoire : int = 0 
+        self._question : Question = None
+        self._questions_posees : int = 0
+        self._questions_par_salle : int = 4
+        self.bonne_réponse_pour_passer : int = 2
+        self.id_partie : str = ""
+        self.nom_joueur : str = ""
+        self.baseURL : str = "http://127.0.0.1:8000"
+
+    def commencer_la_partie(self) : 
+        self.ajouter_joueur_action()
+        self.id_partie = requests.get(f"{self.baseURL}/").json()
+        hist = Histoire() 
+        print(hist.afficher_histoire(0))
+        print(f"\nPour passer à la salle suivante, vous devez répondre correctement à au moins {self.bonne_réponse_pour_passer} réponses sur {self._questions_par_salle}.")
+        input("\nCliquer pour continuer.")
+        self.nouvelle_question() 
+
+    def nouvelle_question(self): 
+        self.quest : Question = None
+        if self._partie == 1 :
+            self.quest = TypageSimple(self.id_partie, self._total1+1)
+        elif self._partie == 2 :
+            self.quest = TypageCompliquer(self.id_partie, self._total2+1)
+        elif self._partie == 3 :
+            self.quest = ErreurFonction(self.id_partie, self._total3+1)
+        else : 
+            print("Le numéro de la partie est invalide.")
+            return
+
+        if (self.quest != None) :
+            self.quest.gestionnaire_du_jeu = self
+            self._question = self.quest
+            self._questions_posees += 1
+            self.quest.afficher_la_question()
+        else :
+            print("La question était invalide.")
+
+    def mettre_à_jours_le_joueur(self, id_joueur:int, salle:int, score:int):
+        # @app.put("/players/{id_partie}/{salle}/{player_id}/{score}")
+        url : str = f"{self.baseURL}/players/{self.id_partie}/salle-{salle}/{id_joueur}/{score}"
+
+
+    def verification_reponse(self, reponse_joueur): 
+        if self._partie == 1 :
+            self._total1 += 1
+        elif self._partie == 2 :
+            self._total2 += 1 
+        elif self._partie == 3 :
+            self._total3 += 1
+
+        if self._question.réponse_à_la_question(reponse_joueur) : 
+            if self._partie == 1 :
+                self._score1 += 1
+            elif self._partie == 2 :
+                self._score2 += 1 
+            elif self._partie == 3 :
+                self._score3 += 1
+
+        verif = self.verification_salle() 
+        if verif == None :
+            input("\nCliquer pour continuer.")
+            self.nouvelle_question()
+        else : 
+            print(verif)
+            input("\nCliquer pour continuer.")
+            if self._partie != self._questions_par_salle : 
+                self.nouvelle_question()
+
+
+    def verification_salle(self) :
+        if self._partie == 1 :
+            score_salle = self._score1 
+        elif self._partie == 2 : 
+            score_salle = self._score2
+        else : 
+            score_salle = self._score3
+        
+        resultat = f"Tu as obtenu {score_salle} / {self._questions_par_salle}."
+        print("\n"+resultat)
+
+        hist = Histoire()
+        if self._questions_posees == self._questions_par_salle :
+
+            if score_salle < self.bonne_réponse_pour_passer : 
+                resultat = "Tu dois recommencer cette salle."
+                self._questions_posees = 0
+                if self._partie == 1 :
+                    self._score1 = 0
+                    self._total1 = 0
+                elif self._partie == 2 :
+                    self._score2 = 0
+                    self._total2 = 0
+                else : 
+                    self._score3 = 0
+                    self._total3 = 0 
+                return resultat
+            
+            texte_sortie = hist.afficher_sortie(self._partie)
+            self._partie += 1
+            self._questions_posees = 0
+            self._total1 = 0
+            self._total2 = 0
+            self._total3 = 0
+
+            if self._partie == self._questions_par_salle :
+                self._scoreTotal = self._score1 + self._score2 + self._score3
+                return texte_sortie + "\n" + str(self._scoreTotal)
+            else :
+                texte_entrée = hist.afficher_histoire(self._partie)
+                input("\nCliquer pour continuer.")
+                return texte_sortie + "\n" + texte_entrée
+
+    def ajouter_joueur(self, le_json):
+        url = f"{self.baseURL}/players"
+        requests.post(url, json=le_json)
+
+    def ajouter_joueur_action(self):
+        print("||   ♫ Bienvenu ! ♪   ||")
+        # print("[?]  Combien de joueur vons jouer ? [1 - 50]")
+        # nombre = 0
+        # while (nombre <= 0 or nombre > 50):
+        #     nombre = int(input("> "))
+        # print("\n • - • - • - • - • - • - • - • \n")
+        # for i in range(1, nombre+1):
+        print(f"[?]  Comment te nomme tu ?")
+        nom = ""
+        while (len(nom) < 3 or len(nom) > 20):
+            nom = input("> ")
+        self.ajouter_joueur({"name": nom, "score_salle_1": 0, "score_salle_2": 0, "score_salle_3": 0, "id_partie" : self.id_partie})
+        self.nom_joueur = nom
+        print("\n • - • - • - • - • - • - • - • \n")
+
+        print(f"[?]  Quel niveau de diffiuclté veut-tu avoir ?")
+        print("1 | ♥ Facile")
+        print("2 | ♣ Normal")
+        print("3 | ♠ Difficile")
+        print("4 | ♦ Cauchemardesque")
+        choix = ""
+        while (choix != "1" and choix != "2" and choix != "3" and choix != "4"):
+            choix = input("> ")
+
+        if (choix == "1") :
+            self._questions_par_salle = 4
+            self.bonne_réponse_pour_passer = 2
+        if (choix == "2") :
+            self._questions_par_salle = 4
+            self.bonne_réponse_pour_passer = 3
+        if (choix == "3") :
+            self._questions_par_salle = 4
+            self.bonne_réponse_pour_passer = 4
+        if (choix == "4") :
+            self._questions_par_salle = 20
+            self.bonne_réponse_pour_passer = 18
+
+
+
+g = GestionnaireDuJeu()
+g.commencer_la_partie()
